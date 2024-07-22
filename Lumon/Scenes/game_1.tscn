@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://brd30kqex7qri"]
+
+[ext_resource type="PackedScene" uid="uid://bhoi3qh3udie5" path="res://Scenes/arcane_flux.tscn" id="1_kl6i7"]
+[ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="2_i306c"]
+[ext_resource type="PackedScene" uid="uid://dp6xqgwxdxojo" path="res://Scenes/platform.tscn" id="3_dt0qh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_i306c")]
+position = Vector2(354, 308)
+
+[node name="Platform" parent="." instance=ExtResource("3_dt0qh")]
+position = Vector2(348, 349)
+
+[node name="Platform2" parent="." instance=ExtResource("3_dt0qh")]
+position = Vector2(478, 379)
+
+[node name="ArcaneFlux" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(447, 305)
+
+[node name="ArcaneFlux2" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(524, 279)

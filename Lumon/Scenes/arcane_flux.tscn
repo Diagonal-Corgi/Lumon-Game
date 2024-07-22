@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhoi3qh3udie5"]
+
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="1_1387b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ry0w"]
+size = Vector2(13.435, 12.7279)
+
+[node name="ArcaneFlux" type="Node2D"]
+scale = Vector2(2, 2)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(1.062, 1)
+texture = ExtResource("1_1387b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.25, 0.25)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_6ry0w")
