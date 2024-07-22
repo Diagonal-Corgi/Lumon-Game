@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhoi3qh3udie5"]
+[gd_scene load_steps=10 format=3 uid="uid://bhoi3qh3udie5"]
 
 [ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="1_1387b"]
 [ext_resource type="Script" path="res://Scripts/arcane_flux.gd" id="1_w4nxt"]
@@ -6,6 +6,46 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
+radius = 8.5
+
+[sub_resource type="Animation" id="Animation_ad8d3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arcane_flux_sprite:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arcane_flux_sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.1, 2.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("arcane_flux_sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_uudhr"]
 resource_name = "rotate"
@@ -36,46 +76,35 @@ tracks/1/keys = {
 "values": [Vector2(2, 2), Vector2(2.245, 2.245)]
 }
 
-[sub_resource type="Animation" id="Animation_ad8d3"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_vjpma"]
+resource_name = "rotate_lumina"
+
+[sub_resource type="Animation" id="Animation_ncirf"]
+resource_name = "pickup"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("arcane_flux_sprite:skew")
+tracks/0/path = NodePath("arcane_flux_sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.0872665]
+"update": 1,
+"values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("arcane_flux_sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2.1, 2.1)]
-}
-
-[sub_resource type="Animation" id="Animation_vjpma"]
-resource_name = "rotate_lumina"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wc2j"]
 _data = {
 "RESET": SubResource("Animation_ad8d3"),
+"pickup": SubResource("Animation_ncirf"),
 "rotate": SubResource("Animation_uudhr"),
 "rotate_lumina": SubResource("Animation_vjpma")
 }
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 3
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_w4nxt")
 
@@ -93,3 +122,5 @@ texture = ExtResource("1_1387b")
 libraries = {
 "": SubResource("AnimationLibrary_2wc2j")
 }
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
