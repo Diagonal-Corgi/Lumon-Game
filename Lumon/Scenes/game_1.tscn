@@ -1,22 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://brd30kqex7qri"]
+[gd_scene load_steps=6 format=3 uid="uid://brd30kqex7qri"]
 
 [ext_resource type="PackedScene" uid="uid://bhoi3qh3udie5" path="res://Scenes/arcane_flux.tscn" id="1_kl6i7"]
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="2_i306c"]
 [ext_resource type="PackedScene" uid="uid://dp6xqgwxdxojo" path="res://Scenes/platform.tscn" id="3_dt0qh"]
+[ext_resource type="PackedScene" uid="uid://duelvi3xrhdvg" path="res://Scenes/lumina.tscn" id="4_tketj"]
+[ext_resource type="PackedScene" uid="uid://db5yo4nx1ul7h" path="res://Scenes/shadonite.tscn" id="5_43ijw"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("2_i306c")]
-position = Vector2(354, 308)
+position = Vector2(435, 248)
 
 [node name="Platform" parent="." instance=ExtResource("3_dt0qh")]
-position = Vector2(348, 349)
+position = Vector2(359, 364)
 
 [node name="Platform2" parent="." instance=ExtResource("3_dt0qh")]
-position = Vector2(478, 379)
+position = Vector2(806, 314)
+rotation = -1.13756
 
-[node name="ArcaneFlux" parent="." instance=ExtResource("1_kl6i7")]
-position = Vector2(447, 305)
+[node name="Platform3" parent="." instance=ExtResource("3_dt0qh")]
+position = Vector2(63.0001, 293)
+rotation = -2.09753
 
-[node name="ArcaneFlux2" parent="." instance=ExtResource("1_kl6i7")]
-position = Vector2(524, 279)
+[node name="RigidBody2D" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(878, 71)
+
+[node name="RigidBody2D2" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(455, 152)
+
+[node name="RigidBody2D3" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(638, 91)
+rotation = -1.1698
+
+[node name="RigidBody2D4" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(585, 200)
+rotation = 0.77369
+
+[node name="RigidBody2D5" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(371, 70)
+rotation = -1.1698
+
+[node name="RigidBody2D6" parent="." instance=ExtResource("1_kl6i7")]
+position = Vector2(318, 179)
+rotation = 0.77369
+
+[node name="RigidBody2D7" parent="." instance=ExtResource("4_tketj")]
+position = Vector2(139, 212)
+
+[node name="RigidBody2D8" parent="." instance=ExtResource("4_tketj")]
+position = Vector2(231, 268)
+
+[node name="RigidBody2D9" parent="." instance=ExtResource("5_43ijw")]
+position = Vector2(337, 276)
+
+[node name="RigidBody2D10" parent="." instance=ExtResource("5_43ijw")]
+position = Vector2(193, 147)
+
+[node name="Player" parent="." instance=ExtResource("2_i306c")]
+position = Vector2(454, 301)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(4, -1)

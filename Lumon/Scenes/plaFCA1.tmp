@@ -2,21 +2,20 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m51qd"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hc0ii"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5mf2"]
 size = Vector2(18, 23)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hc0ii"]
-
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -1)
-collision_layer = 3
 script = ExtResource("1_m51qd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_u5mf2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4.76837e-07, 0.5)
 scale = Vector2(18, 23)
 texture = SubResource("PlaceholderTexture2D_hc0ii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_u5mf2")

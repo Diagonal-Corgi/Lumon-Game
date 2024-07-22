@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://db5yo4nx1ul7h"]
+
+[ext_resource type="Script" path="res://Scripts/shadonite.gd" id="1_cjk0q"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="2_bspwq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
+
+[sub_resource type="Animation" id="Animation_41qce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shadonite_sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3iq1k"]
+resource_name = "rotate_shadonite"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shadonite_sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lcr8o"]
+_data = {
+"RESET": SubResource("Animation_41qce"),
+"rotate_shadonite": SubResource("Animation_3iq1k")
+}
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_s0twl")
+script = ExtResource("1_cjk0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_lu5tu")
+
+[node name="shadonite_sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_bspwq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lcr8o")
+}

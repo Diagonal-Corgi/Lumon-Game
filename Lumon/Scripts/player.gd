@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -200.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY	
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -24,5 +24,12 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		
 	move_and_slide()
+	
+	# Move and detect collisions
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+	# Push RigidBody2D if colliding
+		if collision.get_collider() is RigidBody2D:
+			collision.get_collider().apply_central_impulse(velocity * 0.1)

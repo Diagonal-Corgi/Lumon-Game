@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://duelvi3xrhdvg"]
+
+[ext_resource type="Script" path="res://Scripts/lumina.gd" id="1_n75hf"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="2_7wrbn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
+
+[sub_resource type="Animation" id="Animation_8xhyn"]
+resource_name = "rotate_lumina"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lumina_sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_l34ws"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lumina_sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnhdo"]
+_data = {
+"RESET": SubResource("Animation_l34ws"),
+"rotate_lumina": SubResource("Animation_8xhyn")
+}
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_s0twl")
+script = ExtResource("1_n75hf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_lu5tu")
+
+[node name="lumina_sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_7wrbn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vnhdo")
+}
