@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://db5yo4nx1ul7h"]
+[gd_scene load_steps=10 format=3 uid="uid://db5yo4nx1ul7h"]
 
 [ext_resource type="Script" path="res://Scripts/shadonite.gd" id="1_cjk0q"]
 [ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="2_bspwq"]
+[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_spyrk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boxot"]
+radius = 10.0499
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
 
@@ -44,21 +48,22 @@ _data = {
 "rotate_shadonite": SubResource("Animation_3iq1k")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_boxot"]
-radius = 24.0
-
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_cjk0q")
 
+[node name="Area2D" type="Area2D" parent="." groups=["shadonite"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_boxot")
+debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_lu5tu")
 
 [node name="shadonite_sprite" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("2_bspwq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -66,11 +71,14 @@ libraries = {
 "": SubResource("AnimationLibrary_lcr8o")
 }
 
-[node name="Area2D" type="Area2D" parent="." groups=["shadonite"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_boxot")
-debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(8.27666, 8.56581)
+color = Color(0.992157, 0.921569, 0.670588, 1)
+energy = 2.15
+blend_mode = 2
+texture = ExtResource("3_spyrk")
+texture_scale = 0.01
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

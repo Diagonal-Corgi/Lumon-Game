@@ -10,7 +10,7 @@ const DASH_COOLDOWN = 0.5
 
 var dash_velocity = 100
 var jump_count = 0
-var max_jumps = 2
+var max_jumps = 1
 var is_dashing = false
 var dash_timer = 0.0
 var dash_direction = Vector2.ZERO

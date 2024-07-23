@@ -1,11 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://duelvi3xrhdvg"]
+[gd_scene load_steps=10 format=3 uid="uid://duelvi3xrhdvg"]
 
 [ext_resource type="Script" path="res://Scripts/lumina.gd" id="1_n75hf"]
 [ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="2_7wrbn"]
+[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="2_37mb6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fpipf"]
+radius = 13.1529
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
+radius = 5.09902
 
 [sub_resource type="Animation" id="Animation_l34ws"]
 length = 0.001
@@ -44,32 +49,37 @@ _data = {
 "rotate_lumina": SubResource("Animation_8xhyn")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fpipf"]
-radius = 24.0
-
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_n75hf")
 
+[node name="Area2D" type="Area2D" parent="." groups=["lumina"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fpipf")
+debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(8.27666, 8.56581)
+color = Color(0.72549, 0.827451, 0.760784, 1)
+energy = 2.15
+blend_mode = 2
+texture = ExtResource("2_37mb6")
+texture_scale = 0.01
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_lu5tu")
 
 [node name="lumina_sprite" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("2_7wrbn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vnhdo")
 }
-
-[node name="Area2D" type="Area2D" parent="." groups=["lumina"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_fpipf")
-debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

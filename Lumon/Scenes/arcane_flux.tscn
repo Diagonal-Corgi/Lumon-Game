@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhoi3qh3udie5"]
+[gd_scene load_steps=12 format=3 uid="uid://bhoi3qh3udie5"]
 
 [ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="1_1387b"]
 [ext_resource type="Script" path="res://Scripts/arcane_flux.gd" id="1_w4nxt"]
+[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_kl1ma"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
@@ -88,7 +89,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 0.615572),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(2.245, 2.245)]
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_vjpma"]
@@ -103,16 +104,17 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj68f"]
-radius = 24.0
+radius = 12.0416
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 3
 collision_mask = 3
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_w4nxt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2, 2)
+visible = false
 shape = SubResource("CircleShape2D_lu5tu")
 
 [node name="arcane_flux_sprite" type="Sprite2D" parent="."]
@@ -129,8 +131,17 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="." groups=["arcane flux"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_vj68f")
 debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(8.27666, 8.56581)
+energy = 2.73
+blend_mode = 2
+texture = ExtResource("3_kl1ma")
+texture_scale = 0.01
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

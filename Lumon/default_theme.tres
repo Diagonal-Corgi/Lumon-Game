@@ -1,11 +1,16 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c5j3f4cami1ab"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c5j3f4cami1ab"]
 
 [ext_resource type="FontFile" uid="uid://0ltvlgqm1xrs" path="res://Fonts/PixelOperator8-Bold.ttf" id="1_trhy2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7u1st"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ym8g"]
+bg_color = Color(0.216669, 0.194873, 0.162123, 1)
 
 [resource]
 default_font = ExtResource("1_trhy2")
 Label/colors/font_color = Color(0.705882, 0.647059, 0.415686, 1)
 Label/fonts/font = ExtResource("1_trhy2")
 Label/styles/normal = SubResource("StyleBoxEmpty_7u1st")
+Panel/styles/panel = SubResource("StyleBoxFlat_4ym8g")
+VBoxContainer/constants/separation = 16

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkh5hqdgl8jhb"]
+[gd_scene load_steps=5 format=3 uid="uid://bkh5hqdgl8jhb"]
 
 [ext_resource type="Script" path="res://Scripts/portal.gd" id="1_icuq7"]
 [ext_resource type="Texture2D" uid="uid://bdajrxwetu6tx" path="res://Assets/portal.png" id="1_oljpy"]
+[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_6ip84"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i61lj"]
 radius = 4.0
@@ -17,5 +18,13 @@ shape = SubResource("CapsuleShape2D_i61lj")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oljpy")
 region_rect = Rect2(0, 0, 16, 16)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(4.077, 4)
+color = Color(0.682353, 0.768627, 0.25098, 1)
+energy = 2.59
+blend_mode = 2
+texture = ExtResource("3_6ip84")
+texture_scale = 0.01
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
