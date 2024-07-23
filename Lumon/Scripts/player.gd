@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite_2d = $Sprite2D
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -200.0
+const JUMP_VELOCITY = -250.0
 const DASH_SPEED = 300.0
 const DASH_DURATION = 0.2
 const DASH_COOLDOWN = 0.5
@@ -83,12 +83,6 @@ func start_dash():
 func stop_dash():
 	is_dashing = false
 
-func _on_hitbox_area_area_entered(area):
-	if(area.is_in_group("portal")):
-		print("in portal")
-		if(!area.lock_portal):
-			do_teleport(area)
-
 func do_teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if(portal != area):
@@ -97,3 +91,15 @@ func do_teleport(area):
 					#area.lock_portal = true
 					area.do_lock()
 					global_position = portal.global_position
+
+
+func _on_area_2d_area_entered(area):
+	if(area.is_in_group("lumina")):
+		print("lumina")
+	elif(area.is_in_group("shadonite")):
+		print("shadonite")
+	elif(area.is_in_group("arcane flux")):
+		print("arcane flux")
+	elif(area.is_in_group("portal")):
+		if(!area.lock_portal):
+			do_teleport(area)

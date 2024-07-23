@@ -1,20 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckl4xhjuswana"]
+[gd_scene load_steps=5 format=3 uid="uid://ckl4xhjuswana"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m51qd"]
-[ext_resource type="Texture2D" uid="uid://cywsh4i3tyum6" path="res://Assets/player.png" id="2_0gpqt"]
+[ext_resource type="Texture2D" uid="uid://cbd8e8dvbmre4" path="res://Assets/player.png" id="2_0gpqt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5mf2"]
-size = Vector2(20, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5v4n"]
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h5re4"]
+radius = 13.0
+height = 34.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, -1)
 collision_layer = 2
 script = ExtResource("1_m51qd")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_a5v4n")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.533, 2)
 texture = ExtResource("2_0gpqt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_u5mf2")
+shape = SubResource("CapsuleShape2D_h5re4")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

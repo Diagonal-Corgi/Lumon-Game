@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	animation_player.play("rotate")
 
-
-func _on_body_entered(body):
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("player"):
 		Global.add_arcane_flux()
 		queue_free()

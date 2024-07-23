@@ -9,3 +9,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	animation_player.play("rotate_lumina")
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("player"):
+		Global.add_lumina()
+		queue_free()
