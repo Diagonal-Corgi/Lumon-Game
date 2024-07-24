@@ -20,10 +20,12 @@ position = Vector2(32, 0)
 texture = ExtResource("1_4ao4x")
 
 [node name="Health4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(48, 0)
 texture = ExtResource("1_4ao4x")
 
 [node name="Health5" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(64, 0)
 texture = ExtResource("1_4ao4x")
 
@@ -42,11 +44,9 @@ position = Vector2(32, 0)
 texture = ExtResource("3_knieg")
 
 [node name="Empty4" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(48, 0)
 texture = ExtResource("3_knieg")
 
 [node name="Empty5" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(64, 0)
 texture = ExtResource("3_knieg")

@@ -1,0 +1,417 @@
+[gd_scene load_steps=17 format=3 uid="uid://cmmc75uvol4dc"]
+
+[ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="1_5dr0l"]
+[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="2_yg40m"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_36urc"]
+[ext_resource type="PackedScene" uid="uid://c0086j8v7nqf1" path="res://Scenes/health_bar.tscn" id="4_w5hvs"]
+[ext_resource type="Script" path="res://Scripts/Arcane_Flux_Label.gd" id="5_ah1oa"]
+[ext_resource type="Script" path="res://Scripts/Shadonite_Label.gd" id="6_wo24s"]
+[ext_resource type="Script" path="res://Scripts/Lumina_Label.gd" id="7_e3hqw"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="8_mtg3x"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="9_ak5hg"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="10_ho5wy"]
+[ext_resource type="Texture2D" uid="uid://b2nlwbckvba2r" path="res://Assets/world-tileset.png" id="11_sxmah"]
+[ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
+
+[sub_resource type="Shader" id="Shader_grrf5"]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/VHS-and-CRT-monitor-effect
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+//*** IMPORTANT! ***/ 
+// - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
+// - If you are using this shader as an overlay, and want the shader to affect the nodes below in the Scene hierarchy,
+//   set 'overlay' to true (checked in the inspector).
+// On Mac there is potentially a bug causing this to not work properly. If that is the case and you want to use the shader as an overlay
+// change all \"overlay ? SCREEN_TEXTURE : TEXTURE\" to only \"SCREEN_TEXTURE\" on lines 129-140, and \"vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);\"
+// to \"vec2 uv = warp(SCREEN_UV);\" on line 98.
+uniform bool overlay = false;
+
+uniform float scanlines_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float scanlines_width : hint_range(0.0, 0.5) = 0.25;
+uniform float grille_opacity : hint_range(0.0, 1.0) = 0.3;
+uniform vec2 resolution = vec2(640.0, 480.0); // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
+
+uniform bool pixelate = true; // Fill each square (\"pixel\") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
+
+uniform bool roll = true;
+uniform float roll_speed = 8.0; // Positive values are down, negative are up
+uniform float roll_size : hint_range(0.0, 100.0) = 15.0;
+uniform float roll_variation : hint_range(0.1, 5.0) = 1.8; // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
+uniform float distort_intensity : hint_range(0.0, 0.2) = 0.05; // The distortion created by the rolling effect.
+
+uniform float noise_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float noise_speed = 5.0; // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
+
+uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
+
+uniform float aberration : hint_range(-1.0, 1.0) = 0.03; // Chromatic aberration, a distortion on each color channel.
+uniform float brightness = 1.4; // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
+uniform bool discolor = true; // Add a discolor effect simulating a VHS
+
+uniform float warp_amount :hint_range(0.0, 5.0) = 1.0; // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
+uniform bool clip_warp = false;
+
+uniform float vignette_intensity = 0.4; // Size of the vignette, how far towards the middle it should go.
+uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+// Used by the noise functin to generate a pseudo random value between 0.0 and 1.0
+vec2 random(vec2 uv){
+    uv = vec2( dot(uv, vec2(127.1,311.7) ),
+               dot(uv, vec2(269.5,183.3) ) );
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
+// Generate a Perlin noise used by the distortion effects
+float noise(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix( mix( dot( random(uv_index + vec2(0.0,0.0) ), uv_fract - vec2(0.0,0.0) ),
+                     dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
+                mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
+                     dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) * 0.5 + 0.5;
+}
+
+// Takes in the UV and warps the edges, creating the spherized effect
+vec2 warp(vec2 uv){
+	vec2 delta = uv - 0.5;
+	float delta2 = dot(delta.xy, delta.xy);
+	float delta4 = delta2 * delta2;
+	float delta_offset = delta4 * warp_amount;
+	
+	return uv + delta * delta_offset;
+}
+
+// Adds a black border to hide stretched pixel created by the warp effect
+float border (vec2 uv){
+	float radius = min(warp_amount, 0.08);
+	radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
+	vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
+	float dist = length(max(vec2(0.0), abs_uv)) / radius;
+	float square = smoothstep(0.96, 1.0, dist);
+	return clamp(1.0 - square, 0.0, 1.0);
+}
+
+// Adds a vignette shadow to the edges of the image
+float vignette(vec2 uv){
+	uv *= 1.0 - uv.xy;
+	float vignette = uv.x * uv.y * 15.0;
+	return pow(vignette, vignette_intensity * vignette_opacity);
+}
+
+void fragment()
+{
+	vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV); // Warp the uv. uv will be used in most cases instead of UV to keep the warping
+	vec2 text_uv = uv;
+	vec2 roll_uv = vec2(0.0);
+	float time = roll ? TIME : 0.0;
+	
+
+	// Pixelate the texture based on the given resolution.
+	if (pixelate)
+	{
+		text_uv = ceil(uv * resolution) / resolution;
+	}
+	
+	// Create the rolling effect. We need roll_line a bit later to make the noise effect.
+	// That is why this runs if roll is true OR noise_opacity is over 0.
+	float roll_line = 0.0;
+	if (roll || noise_opacity > 0.0)
+	{
+		// Create the areas/lines where the texture will be distorted.
+		roll_line = smoothstep(0.3, 0.9, sin(uv.y * roll_size - (time * roll_speed) ) );
+		// Create more lines of a different size and apply to the first set of lines. This creates a bit of variation.
+		roll_line *= roll_line * smoothstep(0.3, 0.9, sin(uv.y * roll_size * roll_variation - (time * roll_speed * roll_variation) ) );
+		// Distort the UV where where the lines are
+		roll_uv = vec2(( roll_line * distort_intensity * (1.-UV.x)), 0.0);
+	}
+	
+
+	vec4 text;
+	if (roll)
+	{
+		// If roll is true distort the texture with roll_uv. The texture is split up into RGB to 
+		// make some chromatic aberration. We apply the aberration to the red and green channels accorging to the aberration parameter
+		// and intensify it a bit in the roll distortion.
+		text.r = texture(SCREEN_TEXTURE, text_uv + roll_uv * 0.8 + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv + roll_uv * 1.2 - vec2(aberration, 0.0) * .1 ).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv + roll_uv).b;
+		text.a = 1.0;
+	}
+	else
+	{
+		// If roll is false only apply the aberration without any distorion. The aberration values are very small so the .1 is only 
+		// to make the slider in the Inspector less sensitive.
+		text.r = texture(SCREEN_TEXTURE, text_uv + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv - vec2(aberration, 0.0) * .1).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv).b;
+		text.a = 1.0;
+	}
+	
+	float r = text.r;
+	float g = text.g;
+	float b = text.b;
+	
+	uv = warp(UV);
+	
+	// CRT monitors don't have pixels but groups of red, green and blue dots or lines, called grille. We isolate the texture's color channels 
+	// and divide it up in 3 offsetted lines to show the red, green and blue colors next to each other, with a small black gap between.
+	if (grille_opacity > 0.0){
+		
+		float g_r = smoothstep(0.85, 0.95, abs(sin(uv.x * (resolution.x * 3.14159265))));
+		r = mix(r, r * g_r, grille_opacity);
+		
+		float g_g = smoothstep(0.85, 0.95, abs(sin(1.05 + uv.x * (resolution.x * 3.14159265))));
+		g = mix(g, g * g_g, grille_opacity);
+		
+		float b_b = smoothstep(0.85, 0.95, abs(sin(2.1 + uv.x * (resolution.x * 3.14159265))));
+		b = mix(b, b * b_b, grille_opacity);
+		
+	}
+	
+	// Apply the grille to the texture's color channels and apply Brightness. Since the grille and the scanlines (below) make the image very dark you
+	// can compensate by increasing the brightness.
+	text.r = clamp(r * brightness, 0.0, 1.0);
+	text.g = clamp(g * brightness, 0.0, 1.0);
+	text.b = clamp(b * brightness, 0.0, 1.0);
+	
+	// Scanlines are the horizontal lines that make up the image on a CRT monitor. 
+	// Here we are actual setting the black gap between each line, which I guess is not the right definition of the word, but you get the idea  
+	float scanlines = 0.5;
+	if (scanlines_opacity > 0.0)
+	{
+		// Same technique as above, create lines with sine and applying it to the texture. Smoothstep to allow setting the line size.
+		scanlines = smoothstep(scanlines_width, scanlines_width + 0.5, abs(sin(uv.y * (resolution.y * 3.14159265))));
+		text.rgb = mix(text.rgb, text.rgb * vec3(scanlines), scanlines_opacity);
+	}
+	
+	// Apply the banded noise.
+	if (noise_opacity > 0.0)
+	{
+		// Generate a noise pattern that is very stretched horizontally, and animate it with noise_speed
+		float noise = smoothstep(0.4, 0.5, noise(uv * vec2(2.0, 200.0) + vec2(10.0, (TIME * (noise_speed))) ) );
+		
+		// We use roll_line (set above) to define how big the noise should be vertically (multiplying cuts off all black parts).
+		// We also add in some basic noise with random() to break up the noise pattern above. The noise is sized according to 
+		// the resolution value set in the inspector. If you don't like this look you can 
+		// change \"ceil(uv * resolution) / resolution\" to only \"uv\" to make it less pixelated. Or multiply resolution with som value
+		// greater than 1.0 to make them smaller.
+		roll_line *= noise * scanlines * clamp(random((ceil(uv * resolution) / resolution) + vec2(TIME * 0.8, 0.0)).x + 0.8, 0.0, 1.0);
+		// Add it to the texture based on noise_opacity
+		text.rgb = clamp(mix(text.rgb, text.rgb + roll_line, noise_opacity), vec3(0.0), vec3(1.0));
+	}
+	
+	// Apply static noise by generating it over the whole screen in the same way as above
+	if (static_noise_intensity > 0.0)
+	{
+		text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
+	}
+	
+	// Apply a black border to hide imperfections caused by the warping.
+	// Also apply the vignette
+	text.rgb *= border(uv);
+	text.rgb *= vignette(uv);
+	// Hides the black border and make that area transparent. Good if you want to add the the texture on top an image of a TV or monitor.
+	if (clip_warp)
+	{
+		text.a = border(uv);
+	}
+	
+	// Apply discoloration to get a VHS look (lower saturation and higher contrast)
+	// You can play with the values below or expose them in the Inspector.
+	float saturation = 0.5;
+	float contrast = 1.2;
+	if (discolor)
+	{
+		// Saturation
+		vec3 greyscale = vec3(text.r + text.g + text.b) / 3.;
+		text.rgb = mix(text.rgb, greyscale, saturation);
+		
+		// Contrast
+		float midpoint = pow(0.5, 2.2);
+		text.rgb = (text.rgb - vec3(midpoint)) * contrast + midpoint;
+	}
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yipow"]
+shader = SubResource("Shader_grrf5")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.21
+shader_parameter/scanlines_width = 0.052
+shader_parameter/grille_opacity = 0.17
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 0.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.00100005
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lq2f6"]
+texture = ExtResource("11_sxmah")
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:1/0/physics_layer_0/angular_velocity = 0.0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, 8, -8, 8)
+4:2/0 = 0
+4:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:2/0/physics_layer_0/angular_velocity = 0.0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, 8, -8, 8)
+5:2/0 = 0
+5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:2/0/physics_layer_0/angular_velocity = 0.0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ltixr"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_lq2f6")
+
+[node name="HQ" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_5dr0l")]
+position = Vector2(317, 345)
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player"]
+position = Vector2(1, 1)
+scale = Vector2(9.94541, 7.88172)
+energy = 1.32
+texture = ExtResource("2_yg40m")
+texture_scale = 0.05
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+
+[node name="Panel" type="Panel" parent="Player/Camera2D/CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.366667
+anchor_right = 1.22667
+anchor_bottom = 0.14375
+offset_left = -373.0
+offset_top = 24.0
+offset_right = -373.0
+offset_bottom = 24.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_36urc")
+
+[node name="HealthBar" parent="Player/Camera2D/CanvasLayer/Panel" instance=ExtResource("4_w5hvs")]
+position = Vector2(34, 57)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -43.5
+offset_bottom = 42.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("3_36urc")
+theme_override_constants/separation = 20
+
+[node name="Arcane_Flux_Label" type="Label" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_36urc")
+text = "arcane_flux
+"
+script = ExtResource("5_ah1oa")
+
+[node name="Shadonite_Label" type="Label" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_36urc")
+text = "shadonite"
+script = ExtResource("6_wo24s")
+
+[node name="Lumina_Label" type="Label" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_36urc")
+text = "lumina
+"
+script = ExtResource("7_e3hqw")
+
+[node name="Arcane_Flux_Image" type="Sprite2D" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+position = Vector2(-23.004, 12)
+scale = Vector2(2, 2)
+texture = ExtResource("8_mtg3x")
+
+[node name="Shadonite_Image" type="Sprite2D" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+position = Vector2(-24.004, 44)
+scale = Vector2(2, 2)
+texture = ExtResource("9_ak5hg")
+
+[node name="Lumina_Image" type="Sprite2D" parent="Player/Camera2D/CanvasLayer/Panel/VBoxContainer"]
+position = Vector2(-23.004, 79)
+scale = Vector2(2, 2)
+texture = ExtResource("10_ho5wy")
+
+[node name="ColorRect" type="ColorRect" parent="Player/Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_yipow")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-429, -251)
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_ltixr")
+format = 2
+layer_0/tile_data = PackedInt32Array(1441807, 262144, 1, 1441808, 262144, 1, 1441809, 262144, 1, 1441810, 262144, 1, 1441811, 262144, 1, 1441812, 262144, 1, 1441813, 262144, 1, 1441814, 262144, 1, 1441815, 262144, 1, 1441816, 262144, 1, 1441817, 262144, 1, 1441818, 262144, 1, 1441819, 262144, 1, 1441820, 262144, 1, 1441821, 262144, 1, 1441822, 262144, 1, 1441823, 262144, 1, 1441824, 262144, 1, 983073, 262144, 1, 1048609, 262144, 1, 1179681, 262144, 1, 1245217, 262144, 1, 1310753, 262144, 1, 1376289, 262144, 1, 1441825, 262144, 1, 851981, 262144, 1, 917517, 262144, 1, 983053, 262144, 1, 851982, 262144, 1, 917518, 262144, 1, 983054, 262144, 1, 851983, 262144, 1, 851984, 262144, 1, 851985, 262144, 1, 851986, 262144, 1, 851987, 262144, 1, 851988, 262144, 1, 851989, 262144, 1, 851990, 262144, 1, 786455, 262144, 1, 851991, 262144, 1, 851992, 262144, 1, 851993, 262144, 1, 851994, 262144, 1, 851995, 262144, 1, 851996, 262144, 1, 851997, 262144, 1, 851998, 262144, 1, 851999, 262144, 1, 852000, 262144, 1, 852001, 262144, 1, 917537, 262144, 1, 851980, 262144, 1, 917516, 262144, 1, 983052, 262144, 1, 1048588, 262144, 1, 1179660, 262144, 1, 1245196, 262144, 1, 1310732, 262144, 1, 1376268, 262144, 1, 1441804, 262144, 1, 1048589, 262144, 1, 1179661, 262144, 1, 1245197, 262144, 1, 1310733, 262144, 1, 1376269, 262144, 1, 1441805, 262144, 1, 1048590, 262144, 1, 1179662, 262144, 1, 1245198, 262144, 1, 1310734, 262144, 1, 1376270, 262144, 1, 1441806, 262144, 1, 1507340, 262144, 1, 1572876, 262144, 1, 1638412, 262144, 1, 1507341, 262144, 1, 1572877, 262144, 1, 1638413, 262144, 1, 1507342, 262144, 1, 1572878, 262144, 1, 1638414, 262144, 1, 1507343, 262144, 1, 1572879, 262144, 1, 1638415, 262144, 1, 1507344, 262144, 1, 1572880, 262144, 1, 1638416, 262144, 1, 1507345, 262144, 1, 1572881, 262144, 1, 1638417, 262144, 1, 1507346, 262144, 1, 1572882, 262144, 1, 1638418, 262144, 1, 1507347, 262144, 1, 1572883, 262144, 1, 1638419, 262144, 1, 1507348, 262144, 1, 1572884, 262144, 1, 1638420, 262144, 1, 1507349, 262144, 1, 1572885, 262144, 1, 1638421, 262144, 1, 1507350, 262144, 1, 1572886, 262144, 1, 1638422, 262144, 1, 1507351, 262144, 1, 1572887, 262144, 1, 1638423, 262144, 1, 1507352, 262144, 1, 1572888, 262144, 1, 1638424, 262144, 1, 1507353, 262144, 1, 1572889, 262144, 1, 1638425, 262144, 1, 1507354, 262144, 1, 1572890, 262144, 1, 1638426, 262144, 1, 1507355, 262144, 1, 1572891, 262144, 1, 1638427, 262144, 1, 1507356, 262144, 1, 1572892, 262144, 1, 1638428, 262144, 1, 1507357, 262144, 1, 1572893, 262144, 1, 1638429, 262144, 1, 1507358, 262144, 1, 1572894, 262144, 1, 1638430, 262144, 1, 1507359, 262144, 1, 1572895, 262144, 1, 1638431, 262144, 1, 1507360, 262144, 1, 1572896, 262144, 1, 1638432, 262144, 1, 1507361, 262144, 1, 1572897, 262144, 1, 1638433, 262144, 1, 852002, 262144, 1, 917538, 262144, 1, 983074, 262144, 1, 1048610, 262144, 1, 1179682, 262144, 1, 1245218, 262144, 1, 1310754, 262144, 1, 1376290, 262144, 1, 1441826, 262144, 1, 1507362, 262144, 1, 1572898, 262144, 1, 1638434, 262144, 1, 852003, 262144, 1, 917539, 262144, 1, 983075, 262144, 1, 1179683, 262144, 1, 1245219, 262144, 1, 1310755, 262144, 1, 1376291, 262144, 1, 1441827, 262144, 1, 1507363, 262144, 1, 1572899, 262144, 1, 1638435, 262144, 1, 589847, 262144, 1, 655383, 262144, 1, 720919, 262144, 1, 589848, 262144, 1, 1179658, 262144, 1, 1245194, 262144, 1, 1310730, 262144, 1, 1376266, 262144, 1, 1441802, 262144, 1, 1507338, 262144, 1, 1572874, 262144, 1, 1638410, 262144, 1, 851979, 262144, 1, 917515, 262144, 1, 983051, 262144, 1, 1048587, 262144, 1, 1179659, 262144, 1, 1245195, 262144, 1, 1310731, 262144, 1, 1376267, 262144, 1, 1441803, 262144, 1, 1507339, 262144, 1, 1572875, 262144, 1, 1638411, 262144, 1, 1376265, 262144, 1, 1441801, 262144, 1, 1507337, 262144, 1, 1572873, 262144, 1, 1638409, 262144, 1, 1703945, 262144, 1, 1769481, 262144, 1, 1835017, 262144, 1, 1703946, 262144, 1, 1769482, 262144, 1, 1835018, 262144, 1, 1703947, 262144, 1, 1769483, 262144, 1, 1835019, 262144, 1, 1703948, 262144, 1, 1769484, 262144, 1, 1835020, 262144, 1, 1703949, 262144, 1, 1769485, 262144, 1, 1835021, 262144, 1, 1703950, 262144, 1, 1769486, 262144, 1, 1835022, 262144, 1, 1703951, 262144, 1, 1769487, 262144, 1, 1835023, 262144, 1, 1703952, 262144, 1, 1769488, 262144, 1, 1835024, 262144, 1, 1703953, 262144, 1, 1769489, 262144, 1, 1835025, 262144, 1, 1703954, 262144, 1, 1769490, 262144, 1, 1835026, 262144, 1, 1703955, 262144, 1, 1769491, 262144, 1, 1835027, 262144, 1, 1703956, 262144, 1, 1769492, 262144, 1, 1835028, 262144, 1, 1703957, 262144, 1, 1769493, 262144, 1, 1835029, 262144, 1, 1703958, 262144, 1, 1769494, 262144, 1, 1835030, 262144, 1, 1703959, 262144, 1, 1769495, 262144, 1, 1835031, 262144, 1, 1703960, 262144, 1, 1769496, 262144, 1, 1835032, 262144, 1, 1703961, 262144, 1, 1769497, 262144, 1, 1835033, 262144, 1, 1703962, 262144, 1, 1769498, 262144, 1, 1835034, 262144, 1, 1703963, 262144, 1, 1769499, 262144, 1, 1835035, 262144, 1, 1703964, 262144, 1, 1769500, 262144, 1, 1835036, 262144, 1, 1703965, 262144, 1, 1769501, 262144, 1, 1835037, 262144, 1, 1703966, 262144, 1, 1769502, 262144, 1, 1835038, 262144, 1, 1703967, 262144, 1, 1769503, 262144, 1, 1835039, 262144, 1, 1703968, 262144, 1, 1769504, 262144, 1, 1835040, 262144, 1, 1703969, 262144, 1, 1769505, 262144, 1, 1835041, 262144, 1, 1703970, 262144, 1, 1769506, 262144, 1, 1835042, 262144, 1, 1703971, 262144, 1, 1769507, 262144, 1, 1835043, 262144, 1, 1376292, 262144, 1, 1441828, 262144, 1, 1507364, 262144, 1, 1572900, 262144, 1, 1638436, 262144, 1, 1703972, 262144, 1, 1769508, 262144, 1, 1835044, 262144, 1, 1376293, 262144, 1, 1441829, 262144, 1, 1507365, 262144, 1, 1572901, 262144, 1, 1638437, 262144, 1, 1703973, 262144, 1, 1769509, 262144, 1, 1835045, 262144, 1, 1179684, 262144, 1, 1245220, 262144, 1, 1310756, 262144, 1, 1179685, 262144, 1, 1245221, 262144, 1, 1310757, 262144, 1, 1179657, 262144, 1, 1245193, 262144, 1, 1310729, 262144, 1, 983078, 262144, 1, 1048614, 262144, 1, 1114150, 262144, 1, 1179686, 262144, 1, 1245222, 262144, 1, 1310758, 262144, 1, 1376294, 262144, 1, 1441830, 262144, 1, 1507366, 262144, 1, 1572902, 262144, 1, 1638438, 262144, 1, 458752, 262144, 1, 524288, 262144, 1, 589824, 262144, 1, 655360, 262144, 1, 720896, 262144, 1, 786432, 262144, 1, 851968, 262144, 1, 917504, 262144, 1, 983040, 262144, 1, 1048576, 262144, 1, 1114112, 262144, 1, 1179648, 262144, 1, 1245184, 262144, 1, 1310720, 262144, 1, 1376256, 262144, 1, 1441792, 262144, 1, 1507328, 262144, 1, 1572864, 262144, 1, 1638400, 262144, 1, 1703936, 262144, 1, 1769472, 262144, 1, 1835008, 262144, 1, 1900544, 262144, 1, 458753, 262144, 1, 524289, 262144, 1, 589825, 262144, 1, 655361, 262144, 1, 720897, 262144, 1, 786433, 262144, 1, 851969, 262144, 1, 917505, 262144, 1, 983041, 262144, 1, 1048577, 262144, 1, 1114113, 262144, 1, 1179649, 262144, 1, 1245185, 262144, 1, 1310721, 262144, 1, 1376257, 262144, 1, 1441793, 262144, 1, 1507329, 262144, 1, 1572865, 262144, 1, 1638401, 262144, 1, 1703937, 262144, 1, 1769473, 262144, 1, 1835009, 262144, 1, 1900545, 262144, 1, 458754, 262144, 1, 524290, 262144, 1, 589826, 262144, 1, 655362, 262144, 1, 720898, 262144, 1, 786434, 262144, 1, 851970, 262144, 1, 917506, 262144, 1, 983042, 262144, 1, 1048578, 262144, 1, 1114114, 262144, 1, 1179650, 262144, 1, 1245186, 262144, 1, 1310722, 262144, 1, 1376258, 262144, 1, 1441794, 262144, 1, 1507330, 262144, 1, 1572866, 262144, 1, 1638402, 262144, 1, 1703938, 262144, 1, 1769474, 262144, 1, 1835010, 262144, 1, 1900546, 262144, 1, 458755, 262144, 1, 524291, 262144, 1, 589827, 262144, 1, 655363, 262144, 1, 720899, 262144, 1, 786435, 262144, 1, 851971, 262144, 1, 917507, 262144, 1, 983043, 262144, 1, 1048579, 262144, 1, 1114115, 262144, 1, 1179651, 262144, 1, 1245187, 262144, 1, 1310723, 262144, 1, 1376259, 262144, 1, 1441795, 262144, 1, 1507331, 262144, 1, 1572867, 262144, 1, 1638403, 262144, 1, 1703939, 262144, 1, 1769475, 262144, 1, 1835011, 262144, 1, 1900547, 262144, 1, 458756, 262144, 1, 524292, 262144, 1, 589828, 262144, 1, 655364, 262144, 1, 720900, 262144, 1, 786436, 262144, 1, 851972, 262144, 1, 917508, 262144, 1, 983044, 262144, 1, 1048580, 262144, 1, 1114116, 262144, 1, 1179652, 262144, 1, 1245188, 262144, 1, 1310724, 262144, 1, 1376260, 262144, 1, 1441796, 262144, 1, 1507332, 262144, 1, 1572868, 262144, 1, 1638404, 262144, 1, 1703940, 262144, 1, 1769476, 262144, 1, 1835012, 262144, 1, 1900548, 262144, 1, 458757, 262144, 1, 524293, 262144, 1, 589829, 262144, 1, 655365, 262144, 1, 720901, 262144, 1, 786437, 262144, 1, 851973, 262144, 1, 917509, 262144, 1, 983045, 262144, 1, 1048581, 262144, 1, 1114117, 262144, 1, 1179653, 262144, 1, 1245189, 262144, 1, 1310725, 262144, 1, 1376261, 262144, 1, 1441797, 262144, 1, 1507333, 262144, 1, 1572869, 262144, 1, 1638405, 262144, 1, 1703941, 262144, 1, 1769477, 262144, 1, 1835013, 262144, 1, 1900549, 262144, 1, 458758, 262144, 1, 524294, 262144, 1, 589830, 262144, 1, 786438, 262144, 1, 851974, 262144, 1, 917510, 262144, 1, 983046, 262144, 1, 1048582, 262144, 1, 1114118, 262144, 1, 1179654, 262144, 1, 1245190, 262144, 1, 1310726, 262144, 1, 1376262, 262144, 1, 1441798, 262144, 1, 1507334, 262144, 1, 1572870, 262144, 1, 1638406, 262144, 1, 1703942, 262144, 1, 1769478, 262144, 1, 1835014, 262144, 1, 1900550, 262144, 1, 1179655, 262144, 1, 1245191, 262144, 1, 1310727, 262144, 1, 1376263, 262144, 1, 1441799, 262144, 1, 1507335, 262144, 1, 1572871, 262144, 1, 1638407, 262144, 1, 1703943, 262144, 1, 1769479, 262144, 1, 1835015, 262144, 1, 1900551, 262144, 1, 1179656, 262144, 1, 1245192, 262144, 1, 1310728, 262144, 1, 1376264, 262144, 1, 1441800, 262144, 1, 1507336, 262144, 1, 1572872, 262144, 1, 1638408, 262144, 1, 1703944, 262144, 1, 1769480, 262144, 1, 1835016, 262144, 1, 1900552, 262144, 1, 1900553, 262144, 1, 1900554, 262144, 1, 1900555, 262144, 1, 1900556, 262144, 1, 1900557, 262144, 1, 1900558, 262144, 1, 1900559, 262144, 1, 1900560, 262144, 1, 1900561, 262144, 1, 1900562, 262144, 1, 1900563, 262144, 1, 1900564, 262144, 1, 1900565, 262144, 1, 1900566, 262144, 1, 458775, 262144, 1, 524311, 262144, 1, 1900567, 262144, 1, 458776, 262144, 1, 524312, 262144, 1, 1900568, 262144, 1, 1900569, 262144, 1, 1900570, 262144, 1, 1900571, 262144, 1, 1900572, 262144, 1, 1900573, 262144, 1, 1900574, 262144, 1, 1900575, 262144, 1, 1900576, 262144, 1, 1900577, 262144, 1, 1900578, 262144, 1, 1900579, 262144, 1, 1900580, 262144, 1, 1900581, 262144, 1, 458790, 262144, 1, 524326, 262144, 1, 1703974, 262144, 1, 1769510, 262144, 1, 1835046, 262144, 1, 1900582, 262144, 1, 458791, 262144, 1, 524327, 262144, 1, 720935, 262144, 1, 917543, 262144, 1, 983079, 262144, 1, 1048615, 262144, 1, 1114151, 262144, 1, 1179687, 262144, 1, 1245223, 262144, 1, 1310759, 262144, 1, 1376295, 262144, 1, 1441831, 262144, 1, 1507367, 262144, 1, 1572903, 262144, 1, 1638439, 262144, 1, 1703975, 262144, 1, 1769511, 262144, 1, 1835047, 262144, 1, 1900583, 262144, 1, 458792, 262144, 1, 720936, 262144, 1, 917544, 262144, 1, 983080, 262144, 1, 1048616, 262144, 1, 1114152, 262144, 1, 1179688, 262144, 1, 1245224, 262144, 1, 1310760, 262144, 1, 1376296, 262144, 1, 1441832, 262144, 1, 1507368, 262144, 1, 1572904, 262144, 1, 1638440, 262144, 1, 1703976, 262144, 1, 1769512, 262144, 1, 1835048, 262144, 1, 1900584, 262144, 1, 917545, 262144, 1, 983081, 262144, 1, 1048617, 262144, 1, 1114153, 262144, 1, 1179689, 262144, 1, 1245225, 262144, 1, 1310761, 262144, 1, 1376297, 262144, 1, 1441833, 262144, 1, 1507369, 262144, 1, 1572905, 262144, 1, 1638441, 262144, 1, 1703977, 262144, 1, 1769513, 262144, 1, 1835049, 262144, 1, 1900585, 262144, 1, 917546, 262144, 1, 983082, 262144, 1, 1048618, 262144, 1, 1114154, 262144, 1, 1179690, 262144, 1, 1245226, 262144, 1, 1310762, 262144, 1, 1376298, 262144, 1, 1441834, 262144, 1, 1507370, 262144, 1, 1572906, 262144, 1, 1638442, 262144, 1, 1703978, 262144, 1, 1769514, 262144, 1, 1835050, 262144, 1, 1900586, 262144, 1, 917547, 262144, 1, 983083, 262144, 1, 1048619, 262144, 1, 1114155, 262144, 1, 1179691, 262144, 1, 1245227, 262144, 1, 1310763, 262144, 1, 1376299, 262144, 1, 1441835, 262144, 1, 1507371, 262144, 1, 1572907, 262144, 1, 1638443, 262144, 1, 1703979, 262144, 1, 1769515, 262144, 1, 1835051, 262144, 1, 1900587, 262144, 1, 917548, 262144, 1, 983084, 262144, 1, 1048620, 262144, 1, 1114156, 262144, 1, 1179692, 262144, 1, 1245228, 262144, 1, 1310764, 262144, 1, 1376300, 262144, 1, 1441836, 262144, 1, 1507372, 262144, 1, 1572908, 262144, 1, 1638444, 262144, 1, 1703980, 262144, 1, 1769516, 262144, 1, 1835052, 262144, 1, 1900588, 262144, 1, 458797, 262144, 1, 524333, 262144, 1, 589869, 262144, 1, 655405, 262144, 1, 720941, 262144, 1, 917549, 262144, 1, 983085, 262144, 1, 1048621, 262144, 1, 1114157, 262144, 1, 1179693, 262144, 1, 1245229, 262144, 1, 1310765, 262144, 1, 1376301, 262144, 1, 1441837, 262144, 1, 1507373, 262144, 1, 1572909, 262144, 1, 1638445, 262144, 1, 1703981, 262144, 1, 1769517, 262144, 1, 1835053, 262144, 1, 1900589, 262144, 1, 458798, 262144, 1, 524334, 262144, 1, 589870, 262144, 1, 655406, 262144, 1, 720942, 262144, 1, 786478, 262144, 1, 852014, 262144, 1, 917550, 262144, 1, 983086, 262144, 1, 1048622, 262144, 1, 1114158, 262144, 1, 1179694, 262144, 1, 1245230, 262144, 1, 1310766, 262144, 1, 1376302, 262144, 1, 1441838, 262144, 1, 1507374, 262144, 1, 1572910, 262144, 1, 1638446, 262144, 1, 1703982, 262144, 1, 1769518, 262144, 1, 1835054, 262144, 1, 1900590, 262144, 1, 1376271, 262144, 1, 1376272, 262144, 1, 1376273, 262144, 1, 1376274, 262144, 1, 1376275, 262144, 1, 1376276, 262144, 1, 1376277, 262144, 1, 1376278, 262144, 1, 1376279, 262144, 1, 1376280, 262144, 1, 1376281, 262144, 1, 1376282, 262144, 1, 1376283, 262144, 1, 1376284, 262144, 1, 1376285, 262144, 1, 1376286, 262144, 1, 1376287, 262144, 1, 1376288, 262144, 1, 655384, 262144, 1, 720920, 262144, 1, 786456, 262144, 1, 983076, 262144, 1, 786467, 262144, 1, 720931, 262144, 1, 720934, 262144, 1, 1114149, 262144, 1, 983049, 262144, 1, 983050, 262144, 1, 917513, 262144, 1, 917514, 262144, 1, 0, 262144, 1, 65536, 262144, 1, 131072, 262144, 1, 196608, 262144, 1, 262144, 262144, 1, 327680, 262144, 1, 393216, 262144, 1, 1, 262144, 1, 65537, 262144, 1, 131073, 262144, 1, 196609, 262144, 1, 262145, 262144, 1, 327681, 262144, 1, 393217, 262144, 1, 2, 262144, 1, 65538, 262144, 1, 131074, 262144, 1, 196610, 262144, 1, 262146, 262144, 1, 327682, 262144, 1, 393218, 262144, 1, 3, 262144, 1, 65539, 262144, 1, 131075, 262144, 1, 196611, 262144, 1, 262147, 262144, 1, 327683, 262144, 1, 393219, 262144, 1, 4, 262144, 1, 65540, 262144, 1, 131076, 262144, 1, 196612, 262144, 1, 262148, 262144, 1, 327684, 262144, 1, 393220, 262144, 1, 5, 262144, 1, 65541, 262144, 1, 131077, 262144, 1, 196613, 262144, 1, 262149, 262144, 1, 327685, 262144, 1, 393221, 262144, 1, 6, 262144, 1, 65542, 262144, 1, 131078, 262144, 1, 196614, 262144, 1, 262150, 262144, 1, 327686, 262144, 1, 393222, 262144, 1, 7, 262144, 1, 65543, 262144, 1, 131079, 262144, 1, 196615, 262144, 1, 262151, 262144, 1, 8, 262144, 1, 65544, 262144, 1, 131080, 262144, 1, 196616, 262144, 1, 262152, 262144, 1, 9, 262144, 1, 65545, 262144, 1, 131081, 262144, 1, 196617, 262144, 1, 262153, 262144, 1, 10, 262144, 1, 65546, 262144, 1, 131082, 262144, 1, 196618, 262144, 1, 262154, 262144, 1, 11, 262144, 1, 65547, 262144, 1, 131083, 262144, 1, 196619, 262144, 1, 262155, 262144, 1, 12, 262144, 1, 65548, 262144, 1, 131084, 262144, 1, 196620, 262144, 1, 262156, 262144, 1, 13, 262144, 1, 65549, 262144, 1, 131085, 262144, 1, 196621, 262144, 1, 262157, 262144, 1, 14, 262144, 1, 65550, 262144, 1, 131086, 262144, 1, 196622, 262144, 1, 262158, 262144, 1, 15, 262144, 1, 65551, 262144, 1, 131087, 262144, 1, 196623, 262144, 1, 262159, 262144, 1, 16, 262144, 1, 65552, 262144, 1, 131088, 262144, 1, 196624, 262144, 1, 262160, 262144, 1, 17, 262144, 1, 65553, 262144, 1, 131089, 262144, 1, 196625, 262144, 1, 262161, 262144, 1, 18, 262144, 1, 65554, 262144, 1, 131090, 262144, 1, 196626, 262144, 1, 262162, 262144, 1, 19, 262144, 1, 65555, 262144, 1, 131091, 262144, 1, 196627, 262144, 1, 262163, 262144, 1, 20, 262144, 1, 65556, 262144, 1, 131092, 262144, 1, 196628, 262144, 1, 262164, 262144, 1, 21, 262144, 1, 65557, 262144, 1, 131093, 262144, 1, 196629, 262144, 1, 262165, 262144, 1, 22, 262144, 1, 65558, 262144, 1, 131094, 262144, 1, 196630, 262144, 1, 262166, 262144, 1, 23, 262144, 1, 65559, 262144, 1, 131095, 262144, 1, 196631, 262144, 1, 262167, 262144, 1, 327703, 262144, 1, 393239, 262144, 1, 24, 262144, 1, 65560, 262144, 1, 131096, 262144, 1, 196632, 262144, 1, 262168, 262144, 1, 327704, 262144, 1, 393240, 262144, 1, 25, 262144, 1, 65561, 262144, 1, 131097, 262144, 1, 196633, 262144, 1, 262169, 262144, 1, 26, 262144, 1, 65562, 262144, 1, 131098, 262144, 1, 196634, 262144, 1, 262170, 262144, 1, 27, 262144, 1, 65563, 262144, 1, 131099, 262144, 1, 196635, 262144, 1, 262171, 262144, 1, 28, 262144, 1, 65564, 262144, 1, 131100, 262144, 1, 196636, 262144, 1, 262172, 262144, 1, 29, 262144, 1, 65565, 262144, 1, 131101, 262144, 1, 196637, 262144, 1, 262173, 262144, 1, 30, 262144, 1, 65566, 262144, 1, 131102, 262144, 1, 196638, 262144, 1, 262174, 262144, 1, 31, 262144, 1, 65567, 262144, 1, 131103, 262144, 1, 196639, 262144, 1, 262175, 262144, 1, 32, 262144, 1, 65568, 262144, 1, 131104, 262144, 1, 196640, 262144, 1, 262176, 262144, 1, 33, 262144, 1, 65569, 262144, 1, 131105, 262144, 1, 196641, 262144, 1, 262177, 262144, 1, 34, 262144, 1, 65570, 262144, 1, 131106, 262144, 1, 196642, 262144, 1, 262178, 262144, 1, 35, 262144, 1, 65571, 262144, 1, 131107, 262144, 1, 196643, 262144, 1, 262179, 262144, 1, 36, 262144, 1, 65572, 262144, 1, 131108, 262144, 1, 196644, 262144, 1, 262180, 262144, 1, 37, 262144, 1, 65573, 262144, 1, 131109, 262144, 1, 196645, 262144, 1, 262181, 262144, 1, 38, 262144, 1, 65574, 262144, 1, 131110, 262144, 1, 196646, 262144, 1, 262182, 262144, 1, 39, 262144, 1, 65575, 262144, 1, 131111, 262144, 1, 196647, 262144, 1, 262183, 262144, 1, 40, 262144, 1, 65576, 262144, 1, 131112, 262144, 1, 196648, 262144, 1, 262184, 262144, 1, 41, 262144, 1, 65577, 262144, 1, 131113, 262144, 1, 196649, 262144, 1, 262185, 262144, 1, 42, 262144, 1, 65578, 262144, 1, 131114, 262144, 1, 196650, 262144, 1, 262186, 262144, 1, 43, 262144, 1, 65579, 262144, 1, 131115, 262144, 1, 196651, 262144, 1, 262187, 262144, 1, 44, 262144, 1, 65580, 262144, 1, 131116, 262144, 1, 196652, 262144, 1, 262188, 262144, 1, 45, 262144, 1, 65581, 262144, 1, 131117, 262144, 1, 196653, 262144, 1, 262189, 262144, 1, 327725, 262144, 1, 393261, 262144, 1, 46, 262144, 1, 65582, 262144, 1, 131118, 262144, 1, 196654, 262144, 1, 262190, 262144, 1, 327726, 262144, 1, 393262, 262144, 1, 47, 262144, 1, 65583, 262144, 1, 131119, 262144, 1, 196655, 262144, 1, 262191, 262144, 1, 327727, 262144, 1, 393263, 262144, 1, 458799, 262144, 1, 720930, 262144, 1, 786466, 262144, 1, 720932, 262144, 1, 720933, 262144, 1, 589862, 262144, 1, 655398, 262144, 1, 589863, 262144, 1, 655399, 262144, 1, 524325, 262144, 1, 589861, 262144, 1, 655397, 262144, 1, 589868, 262144, 1, 589867, 262144, 1, 458793, 262144, 1, 786468, 262144, 1)
+
+[node name="Transition" parent="." instance=ExtResource("12_rir2a")]
+position = Vector2(562, 400)

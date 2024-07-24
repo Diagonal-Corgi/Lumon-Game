@@ -103,3 +103,5 @@ func _on_area_2d_area_entered(area):
 	elif(area.is_in_group("portal")):
 		if(!area.lock_portal):
 			do_teleport(area)
+	elif(area.is_in_group("transition")):
+		get_tree().change_scene_to_file("res://Scenes/game_1.tscn")

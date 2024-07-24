@@ -7,7 +7,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var health = Global.arcane_flux
+	var health = Global.health
 	if health == 5:
 		$Health5.visible = true
 		$Empty5.visible = false

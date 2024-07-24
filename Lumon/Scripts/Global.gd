@@ -3,6 +3,7 @@ extends Node
 var arcane_flux = 5
 var shadonite = 0
 var lumina = 0
+var health = 3
 
 func add_arcane_flux():
 	arcane_flux += 1
@@ -19,3 +20,10 @@ func add_shadonite():
 func add_lumina():
 	lumina += 1
 	
+func add_health():
+	if health < 5:
+		health += 1
+
+func remove_health():
+	if health > 0:
+		health -= 1

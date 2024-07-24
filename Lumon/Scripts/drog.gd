@@ -50,11 +50,8 @@ func _on_area_2d_area_entered(area):
 		if(!area.lock_portal):
 			do_teleport(area)
 
-			
-			
-
 
 func _on_hit_box_area_entered(area):
 	if area.is_in_group("player"):
-		Global.remove_arcane_flux()
+		Global.remove_health()
 		print("Player Damaged")

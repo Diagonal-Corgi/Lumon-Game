@@ -9,8 +9,12 @@ bg_color = Color(0.216669, 0.194873, 0.162123, 1)
 
 [resource]
 default_font = ExtResource("1_trhy2")
+Button/constants/h_separation = 14
+Button/constants/icon_max_width = 20
+Button/constants/outline_size = 0
+HBoxContainer/constants/separation = 25
 Label/colors/font_color = Color(0.705882, 0.647059, 0.415686, 1)
 Label/fonts/font = ExtResource("1_trhy2")
 Label/styles/normal = SubResource("StyleBoxEmpty_7u1st")
 Panel/styles/panel = SubResource("StyleBoxFlat_4ym8g")
-VBoxContainer/constants/separation = 16
+VBoxContainer/constants/separation = 20

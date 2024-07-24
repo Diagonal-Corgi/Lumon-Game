@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://xmfej6r0lvpk"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_si2ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12w3k"]
+
+[node name="Transition" type="Area2D" groups=["transition"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_si2ls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_12w3k")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

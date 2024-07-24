@@ -7,7 +7,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5tu"]
-radius = 8.5
+radius = 14.0
 
 [sub_resource type="Animation" id="Animation_ad8d3"]
 length = 0.001
@@ -104,17 +104,14 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj68f"]
-radius = 12.0416
+radius = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 3
-collision_mask = 3
 mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_w4nxt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_lu5tu")
 
 [node name="arcane_flux_sprite" type="Sprite2D" parent="."]
@@ -136,6 +133,7 @@ shape = SubResource("CircleShape2D_vj68f")
 debug_color = Color(0.689711, 0.407193, 0.746194, 0.42)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(0, -9.53674e-07)
 scale = Vector2(8.27666, 8.56581)
 energy = 2.73
