@@ -1,0 +1,248 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8e1fdhl0frdo"]
+
+[ext_resource type="Texture2D" uid="uid://bohgu7df2npwk" path="res://Assets/crafting-area.png" id="1_5x8ls"]
+[ext_resource type="Script" path="res://Scripts/crafting_area.gd" id="1_sv85j"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_ew8hq"]
+[ext_resource type="Texture2D" uid="uid://3dbwxig0ldgx" path="res://Assets/dash.png" id="4_0jevj"]
+[ext_resource type="Texture2D" uid="uid://buhv234dg75qx" path="res://Assets/double-jump.png" id="5_844l7"]
+[ext_resource type="Texture2D" uid="uid://xg3er7yiukcr" path="res://Assets/goo-gun.png" id="6_7b78t"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="7_xn8tu"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="8_sfv7n"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="9_4p0wo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esntc"]
+size = Vector2(82.2718, 25.8533)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40mwh"]
+bg_color = Color(0.145098, 0.137255, 0.12549, 1)
+
+[node name="Crafting Area" type="Node2D"]
+script = ExtResource("1_sv85j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15.75, 16.75)
+scale = Vector2(1.884, 2)
+texture = ExtResource("1_5x8ls")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" groups=["crafting_area"]]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(-1.72505, -4.94837)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_esntc")
+
+[node name="F_label" type="Label" parent="."]
+visible = false
+offset_left = -5.0
+offset_top = -19.0
+offset_right = 33.0
+offset_bottom = -3.0
+theme = ExtResource("3_ew8hq")
+text = "F"
+
+[node name="Craft_Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -221.0
+offset_top = -225.0
+offset_right = 219.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_ew8hq")
+
+[node name="ItemList" type="ItemList" parent="Craft_Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -144.0
+offset_right = 218.0
+offset_bottom = -34.0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme = ExtResource("3_ew8hq")
+item_count = 3
+item_0/text = "Dash"
+item_0/icon = ExtResource("4_0jevj")
+item_1/text = "Double Jump"
+item_1/icon = ExtResource("5_844l7")
+item_2/text = "Goo Gun"
+item_2/icon = ExtResource("6_7b78t")
+
+[node name="Button" type="Button" parent="Craft_Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -35.0
+offset_right = -30.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_ew8hq")
+theme_override_colors/font_color = Color(0.862101, 0.710881, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 16
+text = "Request
+"
+
+[node name="Label" type="Label" parent="Craft_Panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 382.0
+offset_bottom = 28.0
+theme = ExtResource("3_ew8hq")
+text = "Employment Reward Scheme"
+
+[node name="Label2" type="Label" parent="Craft_Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -182.0
+offset_top = -65.5
+offset_right = -86.0
+offset_bottom = -53.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("3_ew8hq")
+theme_override_colors/font_color = Color(0.643137, 0.988235, 0.329412, 1)
+theme_override_font_sizes/font_size = 8
+text = "Criteria
+"
+
+[node name="Label3" type="Label" parent="Craft_Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = -63.5
+offset_right = -323.0
+offset_bottom = -51.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("3_ew8hq")
+theme_override_colors/font_color = Color(0.643137, 0.988235, 0.329412, 1)
+theme_override_font_sizes/font_size = 8
+text = "Benefit
+"
+
+[node name="Dash_Criteria" type="Panel" parent="Craft_Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 60.0
+offset_right = 410.0
+offset_bottom = 90.0
+theme = ExtResource("3_ew8hq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
+
+[node name="Lumina" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+position = Vector2(20, 15)
+texture = ExtResource("7_xn8tu")
+
+[node name="Lumina3" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+position = Vector2(40, 15)
+texture = ExtResource("7_xn8tu")
+
+[node name="Shadonite3" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+position = Vector2(80, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Shadonite2" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+position = Vector2(60, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Double_Jump_Criteria" type="Panel" parent="Craft_Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 95.0
+offset_right = 410.0
+offset_bottom = 125.0
+theme = ExtResource("3_ew8hq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
+
+[node name="Shadonite" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(60, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Shadonite2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(60, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Shadonite4" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(80, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Lumina" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(20, 15)
+texture = ExtResource("7_xn8tu")
+
+[node name="Lumina2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(40, 15)
+texture = ExtResource("7_xn8tu")
+
+[node name="Arcane-flux" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(100, 15)
+texture = ExtResource("9_4p0wo")
+
+[node name="Arcane-flux3" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(120, 15)
+texture = ExtResource("9_4p0wo")
+
+[node name="Arcane-flux4" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(140, 15)
+texture = ExtResource("9_4p0wo")
+
+[node name="Arcane-flux2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+position = Vector2(160, 15)
+texture = ExtResource("9_4p0wo")
+
+[node name="Goo_Gun_Criteria" type="Panel" parent="Craft_Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 130.0
+offset_right = 410.0
+offset_bottom = 160.0
+theme = ExtResource("3_ew8hq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
+
+[node name="Arcane-flux" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+position = Vector2(60, 15)
+texture = ExtResource("9_4p0wo")
+
+[node name="Lumina3" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+position = Vector2(20, 15)
+texture = ExtResource("7_xn8tu")
+
+[node name="Shadonite3" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+position = Vector2(40, 15)
+texture = ExtResource("8_sfv7n")
+
+[node name="Label4" type="Label" parent="Craft_Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 174.0
+offset_right = 288.0
+offset_bottom = 200.0
+theme = ExtResource("3_ew8hq")
+theme_override_font_sizes/font_size = 8
+text = "Please refer to the LUMON employee
+manual for use of authorised equipment."
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]

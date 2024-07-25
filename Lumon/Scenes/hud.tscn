@@ -1,42 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://gvh50e1btqef"]
+[gd_scene load_steps=11 format=3 uid="uid://c0kufrfbcixx3"]
 
-[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="1_twi18"]
-[ext_resource type="Script" path="res://Scripts/StartButton.gd" id="2_5bm2d"]
-[ext_resource type="Texture2D" uid="uid://7nxx2jbta8qt" path="res://Assets/lumon-banner.png" id="3_ga7vl"]
-[ext_resource type="Texture2D" uid="uid://dojctv10gyqxh" path="res://Assets/portal-particle-effect.png" id="3_k1p1n"]
-[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="4_24176"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="1_wel6p"]
+[ext_resource type="PackedScene" uid="uid://c0086j8v7nqf1" path="res://Scenes/health_bar.tscn" id="2_di5hg"]
+[ext_resource type="Script" path="res://Scripts/Arcane_Flux_Label.gd" id="3_856jd"]
+[ext_resource type="Script" path="res://Scripts/Shadonite_Label.gd" id="4_8r6cu"]
+[ext_resource type="Script" path="res://Scripts/Lumina_Label.gd" id="5_mv0mj"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="6_3j1q5"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="7_38m8o"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="8_0y0ys"]
 
-[sub_resource type="GDScript" id="GDScript_o1wx4"]
-script/source = "extends MarginContainer
-var CursorScene = preload(\"res://Scenes/cursor.tscn\")
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# Instance the cursor and add it to the scene
-	var cursor = CursorScene.instantiate()
-	add_child(cursor)
-
-
-"
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xgdef"]
-lifetime_randomness = 0.14
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 128.0
-angle_min = -720.0
-angle_max = 720.0
-inherit_velocity_ratio = 0.241
-orbit_velocity_min = 0.033
-orbit_velocity_max = 0.055
-radial_velocity_min = -16.44
-radial_velocity_max = -16.44
-gravity = Vector3(0, 0, 0)
-scale_max = 3.0
-turbulence_enabled = true
-turbulence_noise_speed_random = 0.53
-
-[sub_resource type="Shader" id="Shader_p1dk4"]
+[sub_resource type="Shader" id="Shader_t4fv7"]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/VHS-and-CRT-monitor-effect
@@ -270,8 +243,8 @@ void fragment()
 	COLOR = text;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vym8i"]
-shader = SubResource("Shader_p1dk4")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0n1pu"]
+shader = SubResource("Shader_t4fv7")
 shader_parameter/overlay = false
 shader_parameter/scanlines_opacity = 0.21
 shader_parameter/scanlines_width = 0.052
@@ -294,78 +267,108 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
-[node name="MainMenu" type="MarginContainer"]
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Panel2" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.366667
+anchor_right = 1.22667
+anchor_bottom = 0.14375
+offset_left = -373.0
+offset_top = 24.0
+offset_right = -373.004
+offset_bottom = 16.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_wel6p")
+
+[node name="HealthBar" parent="Panel2" instance=ExtResource("2_di5hg")]
+position = Vector2(34, 57)
+
+[node name="Arcane_Flux_Image" type="Sprite2D" parent="Panel2"]
+position = Vector2(906.004, 15)
+scale = Vector2(2, 2)
+texture = ExtResource("6_3j1q5")
+
+[node name="Shadonite_Image" type="Sprite2D" parent="Panel2"]
+position = Vector2(905, 49.5)
+scale = Vector2(2, 2)
+texture = ExtResource("7_38m8o")
+
+[node name="Lumina_Image" type="Sprite2D" parent="Panel2"]
+position = Vector2(906, 84.5)
+scale = Vector2(2, 2)
+texture = ExtResource("8_0y0ys")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -102.996
+offset_top = -42.0
+offset_right = -8.99597
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_wel6p")
+theme_override_constants/separation = 30
+
+[node name="Arcane_Flux_Label" type="Label" parent="Panel2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_wel6p")
+theme_override_font_sizes/font_size = 8
+text = "arcane_flux
+"
+script = ExtResource("3_856jd")
+
+[node name="Shadonite_Label" type="Label" parent="Panel2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_wel6p")
+theme_override_font_sizes/font_size = 8
+text = "shadonite"
+script = ExtResource("4_8r6cu")
+
+[node name="Lumina_Label" type="Label" parent="Panel2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_wel6p")
+theme_override_font_sizes/font_size = 8
+text = "lumina
+"
+script = ExtResource("5_mv0mj")
+
+[node name="Mission_Title" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 9.0
+offset_right = 564.0
+offset_bottom = 25.0
+theme = ExtResource("1_wel6p")
+theme_override_font_sizes/font_size = 16
+text = "Mission Objective:"
+
+[node name="Mission_Description" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 45.0
+offset_right = 861.0
+offset_bottom = 98.0
+theme = ExtResource("1_wel6p")
+theme_override_colors/font_color = Color(0.658824, 0.752941, 0.690196, 1)
+text = "Mission Description
+"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0n1pu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_twi18")
-script = SubResource("GDScript_o1wx4")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(730, 181)
-scale = Vector2(0.230089, 0.253955)
-color = Color(0.431373, 1, 0.309804, 1)
-energy = 0.83
-texture = ExtResource("4_24176")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme = ExtResource("1_twi18")
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "                           "
-
-[node name="Title" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Title"]
-layout_mode = 2
-texture = ExtResource("3_ga7vl")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="MarginContainer/HBoxContainer/Title/TextureRect"]
-position = Vector2(518, 189)
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_xgdef")
-texture = ExtResource("3_k1p1n")
-lifetime = 5.0
-speed_scale = 2.02
-explosiveness = 0.14
-fixed_fps = 60
-
-[node name="MenuOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Title"]
-layout_mode = 2
-theme = ExtResource("1_twi18")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Title/MenuOptions"]
-layout_mode = 2
-
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/Title/MenuOptions"]
-layout_mode = 2
-text = "
-Start
-
-"
-script = ExtResource("2_5bm2d")
-
-[node name="Credit" type="Label" parent="MarginContainer/HBoxContainer/Title/MenuOptions"]
-layout_mode = 2
-text = "DiagonalCorgi
-Ver 1.0"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_vym8i")
-layout_mode = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
-
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Title/MenuOptions/StartButton" to="MarginContainer/HBoxContainer/Title/MenuOptions/StartButton" method="_on_pressed"]

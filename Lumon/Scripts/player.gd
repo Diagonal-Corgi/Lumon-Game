@@ -26,10 +26,7 @@ var is_flipped = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	add_child(aiming_line)
-	aiming_line.width = 2
-	aiming_line.default_color = Color.RED
-	aiming_line.points = [Vector2.ZERO, Vector2.ZERO]
+	pass
 	
 func _physics_process(delta):
 	# Add the gravity.
@@ -41,9 +38,7 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("ranged_attack"):
 		shoot()
-		# Update aiming line
-	var mouse_position = get_global_mouse_position()
-	aiming_line.points[1] = mouse_position - global_position
+
 	
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_attack()
