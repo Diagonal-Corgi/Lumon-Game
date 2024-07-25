@@ -8,13 +8,10 @@
 
 [sub_resource type="GDScript" id="GDScript_o1wx4"]
 script/source = "extends MarginContainer
-var CursorScene = preload(\"res://Scenes/cursor.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Instance the cursor and add it to the scene
-	var cursor = CursorScene.instantiate()
-	add_child(cursor)
+	pass
 
 
 "
@@ -301,6 +298,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_twi18")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 script = SubResource("GDScript_o1wx4")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -312,6 +313,10 @@ texture = ExtResource("4_24176")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

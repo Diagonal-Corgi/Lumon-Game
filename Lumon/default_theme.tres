@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7u1st"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ym8g"]
-bg_color = Color(0.216669, 0.194873, 0.162123, 1)
+bg_color = Color(0.215686, 0.196078, 0.160784, 0.415686)
 
 [resource]
 default_font = ExtResource("1_trhy2")
