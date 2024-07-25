@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://xmfej6r0lvpk"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_si2ls"]
+[ext_resource type="Texture2D" uid="uid://im7dv05ubxhc" path="res://Assets/exit-door.png" id="1_ulc43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12w3k"]
+size = Vector2(32, 65)
 
-[node name="Transition" type="Area2D" groups=["transition"]]
+[node name="Transition" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(20, 20)
-texture = SubResource("CanvasTexture_si2ls")
+scale = Vector2(2, 2)
+texture = ExtResource("1_ulc43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_12w3k")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

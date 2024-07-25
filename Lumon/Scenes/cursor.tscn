@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bckhpqa0q3mye"]
+
+[ext_resource type="Texture2D" uid="uid://bo0adjsp680sx" path="res://Assets/cursor.png" id="1_38xoq"]
+
+[sub_resource type="GDScript" id="GDScript_a053f"]
+
+[node name="Cursor" type="Sprite2D"]
+texture = ExtResource("1_38xoq")
+script = SubResource("GDScript_a053f")

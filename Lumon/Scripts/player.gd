@@ -1,9 +1,10 @@
 extends CharacterBody2D
-
-@onready var sprite_2d = $Sprite2D
+@onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var animation_player = $AnimatedSprite2D/HitBox/AnimationPlayer
+var ProjectileScene = preload("res://Scenes/projectile.tscn")
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -290.0
 const DASH_SPEED = 300.0
 const DASH_DURATION = 0.2
 const DASH_COOLDOWN = 0.5
@@ -11,35 +12,59 @@ const DASH_COOLDOWN = 0.5
 var dash_velocity = 100
 var jump_count = 0
 var max_jumps = 1
+var is_jumping = false
 var is_dashing = false
 var dash_timer = 0.0
 var dash_direction = Vector2.ZERO
 var dash_cooldown_timer = 0.0
-
+var melee_attack_damage = 1
 var portal_id = 0
+var aiming_line = Line2D.new()
+var is_flipped = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-
+func _ready():
+	add_child(aiming_line)
+	aiming_line.width = 2
+	aiming_line.default_color = Color.RED
+	aiming_line.points = [Vector2.ZERO, Vector2.ZERO]
+	
 func _physics_process(delta):
 	# Add the gravity.
+
+	if velocity.x == 0 && velocity.y == 0 :
+		animated_sprite_2d.play("idle")
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-
+		
+	if Input.is_action_just_pressed("ranged_attack"):
+		shoot()
+		# Update aiming line
+	var mouse_position = get_global_mouse_position()
+	aiming_line.points[1] = mouse_position - global_position
+	
+	if Input.is_action_just_pressed("melee_attack"):
+		melee_attack()
+	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
+		velocity.y = JUMP_VELOCITY / 4
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and jump_count < max_jumps:
 		velocity.y = JUMP_VELOCITY	
 		jump_count += 1
-
+		if is_dashing == false:
+			animated_sprite_2d.play("jump")
+		if is_jumping && !is_on_floor():
+			animated_sprite_2d.play("double_jump")
 	if is_on_floor():
 		jump_count = 0
+		is_jumping = false
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	
+	# As good practice, you should replace UI actions with custom gameplay actions.	
 		# Handle dash input.
 	if Input.is_action_just_pressed("Dash") and dash_cooldown_timer <= 0:
+		animated_sprite_2d.play("dash")
 		start_dash()
 
  # Handle dash movement.
@@ -53,12 +78,18 @@ func _physics_process(delta):
 		var direction = Input.get_axis("ui_left", "ui_right")
 		if direction:
 			velocity.x = direction * SPEED
+			if is_on_floor() && is_dashing == false:
+				animated_sprite_2d.play("run")
+			else:
+				animated_sprite_2d.play("jump")
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if direction > 0:
-			sprite_2d.flip_h = true
+			animated_sprite_2d.flip_h = false
+			is_flipped = false
 		elif direction < 0:
-			sprite_2d.flip_h = false	
+			animated_sprite_2d.flip_h = true	
+			is_flipped = true
 					# Update dash cooldown timer.
 		if dash_cooldown_timer > 0:
 			dash_cooldown_timer -= delta
@@ -78,7 +109,7 @@ func start_dash():
 	dash_cooldown_timer = DASH_COOLDOWN
 	dash_direction = Vector2(Input.get_axis("ui_left", "ui_right"), 0).normalized()
 	if dash_direction == Vector2.ZERO:
-		dash_direction = Vector2(1 if sprite_2d.flip_h else -1, 0)
+		dash_direction = Vector2(-1 if animated_sprite_2d.flip_h else 1, 0)
 		
 func stop_dash():
 	is_dashing = false
@@ -103,5 +134,36 @@ func _on_area_2d_area_entered(area):
 	elif(area.is_in_group("portal")):
 		if(!area.lock_portal):
 			do_teleport(area)
-	elif(area.is_in_group("transition")):
+	elif(area.is_in_group("transition_hq")):
+		get_tree().change_scene_to_file("res://Scenes/hq.tscn")
+	elif(area.is_in_group("transition_game_1")):
 		get_tree().change_scene_to_file("res://Scenes/game_1.tscn")
+
+# Function to shoot the projectile
+func shoot():
+	var projectile = ProjectileScene.instantiate()
+	# Set the position of the projectile (e.g., at the player's position)
+	if is_flipped == true:
+		projectile.position = animated_sprite_2d.global_position + Vector2(-16, -16)
+	elif is_flipped == false:
+		projectile.position = animated_sprite_2d.global_position + Vector2(16, -16)
+
+	# Calculate the direction to shoot based on mouse position
+	var mouse_position = get_global_mouse_position()
+	var shoot_direction = (mouse_position - global_position).normalized()
+
+	# Calculate the angle of the shoot direction
+	var angle = atan2(shoot_direction.y, shoot_direction.x)
+
+	# Set the direction of the projectile based on the angle
+	projectile.set_direction_angle(angle)
+
+	# Add the projectile to the scene
+	get_tree().current_scene.add_child(projectile)
+
+func melee_attack():
+	if animated_sprite_2d.flip_h == true:
+		animation_player.play("attack_left")
+	elif animated_sprite_2d.flip_h == false:
+		animation_player.play("attack")
+	

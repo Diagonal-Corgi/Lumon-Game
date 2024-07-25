@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://12ndorqr0vp6"]
+
+[ext_resource type="Texture2D" uid="uid://dojctv10gyqxh" path="res://Assets/portal-particle-effect.png" id="1_bk6aw"]
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_o4742"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oo7nr"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2du5p"]
+
+[node name="projectile" type="CharacterBody2D"]
+script = ExtResource("1_o4742")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oo7nr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_bk6aw")
+
+[node name="Area2D" type="Area2D" parent="." groups=["player_projectile_attack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2du5p")

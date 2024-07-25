@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 @export var speed = 100
+@export var drog_health = 1
 @onready var player = $"../Player"
+@onready var animation_player = $AnimationPlayer
 
 var player_position
 var target_position
@@ -55,3 +57,15 @@ func _on_hit_box_area_entered(area):
 	if area.is_in_group("player"):
 		Global.remove_health()
 		print("Player Damaged")
+	elif area.is_in_group("player_melee_attack"):
+		take_damage()
+	elif area.is_in_group("player_projectile_attack"):
+		take_damage()
+	
+
+func take_damage():
+	if drog_health > 0:
+		animation_player.play("damage_taken")
+		drog_health -= 1
+	elif drog_health == 0:
+		queue_free()
