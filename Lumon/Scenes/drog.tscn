@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://ntaqmabsoux1" path="res://Assets/drog.png" id="1_3g1sj"]
 [ext_resource type="Script" path="res://Scripts/drog.gd" id="1_t3epn"]
 
+[sub_resource type="Animation" id="Animation_s6g1d"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_whx1c"]
 resource_name = "damage_taken"
 length = 0.2
@@ -18,9 +21,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.687861, 0, 0.222269, 1), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_s6g1d"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ug5hg"]
 _data = {

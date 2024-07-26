@@ -1,9 +1,13 @@
 extends Node
 
-var arcane_flux = 5
-var shadonite = 0
-var lumina = 0
+var arcane_flux = 99
+var shadonite = 99
+var lumina = 99
 var health = 3
+
+var dash_ability_enabled = false
+var double_jump_ability_enabled = false
+var goo_gun_ability_enabled = false
 
 func add_arcane_flux():
 	arcane_flux += 1
@@ -27,3 +31,12 @@ func add_health():
 func remove_health():
 	if health > 0:
 		health -= 1
+
+func acquire_dash_ability():
+	dash_ability_enabled = true
+	
+func acquire_double_jump_ability():
+	double_jump_ability_enabled = true
+	
+func acquire_goo_gun_ability():
+	goo_gun_ability_enabled = true

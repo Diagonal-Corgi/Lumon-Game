@@ -36,9 +36,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	if Input.is_action_just_pressed("ranged_attack"):
+	if Input.is_action_just_pressed("ranged_attack") && Global.goo_gun_ability_enabled:
 		shoot()
-
 	
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_attack()
@@ -58,7 +57,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.	
 		# Handle dash input.
-	if Input.is_action_just_pressed("Dash") and dash_cooldown_timer <= 0:
+	if Input.is_action_just_pressed("Dash") and dash_cooldown_timer <= 0 && Global.dash_ability_enabled:
 		animated_sprite_2d.play("dash")
 		start_dash()
 

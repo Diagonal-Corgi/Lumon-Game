@@ -352,6 +352,7 @@ BEING-RESOURCE-MANAGER-2541
 autowrap_mode = 2
 
 [node name="Label5" type="Label" parent="MarginContainer/Panel"]
+layout_mode = 0
 offset_left = 393.0
 offset_top = 666.0
 offset_right = 576.0

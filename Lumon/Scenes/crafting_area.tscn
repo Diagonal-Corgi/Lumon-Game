@@ -25,11 +25,9 @@ scale = Vector2(1.884, 2)
 texture = ExtResource("1_5x8ls")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D" groups=["crafting_area"]]
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 position = Vector2(-1.72505, -4.94837)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_esntc")
 
 [node name="F_label" type="Label" parent="."]
@@ -41,8 +39,7 @@ offset_bottom = -3.0
 theme = ExtResource("3_ew8hq")
 text = "F"
 
-[node name="Craft_Panel" type="Panel" parent="."]
-visible = false
+[node name="CraftPanel" type="Panel" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -56,7 +53,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("3_ew8hq")
 
-[node name="ItemList" type="ItemList" parent="Craft_Panel"]
+[node name="ItemList" type="ItemList" parent="CraftPanel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -76,7 +73,7 @@ item_1/icon = ExtResource("5_844l7")
 item_2/text = "Goo Gun"
 item_2/icon = ExtResource("6_7b78t")
 
-[node name="Button" type="Button" parent="Craft_Panel"]
+[node name="RequestButton" type="Button" parent="CraftPanel"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -92,10 +89,11 @@ grow_vertical = 0
 theme = ExtResource("3_ew8hq")
 theme_override_colors/font_color = Color(0.862101, 0.710881, 7.70092e-07, 1)
 theme_override_font_sizes/font_size = 16
+disabled = true
 text = "Request
 "
 
-[node name="Label" type="Label" parent="Craft_Panel"]
+[node name="EmploymentRewardScheme" type="Label" parent="CraftPanel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 5.0
@@ -104,7 +102,7 @@ offset_bottom = 28.0
 theme = ExtResource("3_ew8hq")
 text = "Employment Reward Scheme"
 
-[node name="Label2" type="Label" parent="Craft_Panel"]
+[node name="Criteria" type="Label" parent="CraftPanel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -123,7 +121,7 @@ theme_override_font_sizes/font_size = 8
 text = "Criteria
 "
 
-[node name="Label3" type="Label" parent="Craft_Panel"]
+[node name="Benefit" type="Label" parent="CraftPanel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -142,7 +140,7 @@ theme_override_font_sizes/font_size = 8
 text = "Benefit
 "
 
-[node name="Dash_Criteria" type="Panel" parent="Craft_Panel"]
+[node name="DashCriteria" type="Panel" parent="CraftPanel"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 60.0
@@ -151,23 +149,23 @@ offset_bottom = 90.0
 theme = ExtResource("3_ew8hq")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
 
-[node name="Lumina" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+[node name="Lumina" type="Sprite2D" parent="CraftPanel/DashCriteria"]
 position = Vector2(20, 15)
 texture = ExtResource("7_xn8tu")
 
-[node name="Lumina3" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+[node name="Lumina3" type="Sprite2D" parent="CraftPanel/DashCriteria"]
 position = Vector2(40, 15)
 texture = ExtResource("7_xn8tu")
 
-[node name="Shadonite3" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+[node name="Shadonite3" type="Sprite2D" parent="CraftPanel/DashCriteria"]
 position = Vector2(80, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Shadonite2" type="Sprite2D" parent="Craft_Panel/Dash_Criteria"]
+[node name="Shadonite2" type="Sprite2D" parent="CraftPanel/DashCriteria"]
 position = Vector2(60, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Double_Jump_Criteria" type="Panel" parent="Craft_Panel"]
+[node name="DoubleJumpCriteria" type="Panel" parent="CraftPanel"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 95.0
@@ -176,43 +174,43 @@ offset_bottom = 125.0
 theme = ExtResource("3_ew8hq")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
 
-[node name="Shadonite" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Shadonite" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(60, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Shadonite2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Shadonite2" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(60, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Shadonite4" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Shadonite4" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(80, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Lumina" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Lumina" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(20, 15)
 texture = ExtResource("7_xn8tu")
 
-[node name="Lumina2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Lumina2" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(40, 15)
 texture = ExtResource("7_xn8tu")
 
-[node name="Arcane-flux" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Arcane-flux" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(100, 15)
 texture = ExtResource("9_4p0wo")
 
-[node name="Arcane-flux3" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Arcane-flux3" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(120, 15)
 texture = ExtResource("9_4p0wo")
 
-[node name="Arcane-flux4" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Arcane-flux4" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(140, 15)
 texture = ExtResource("9_4p0wo")
 
-[node name="Arcane-flux2" type="Sprite2D" parent="Craft_Panel/Double_Jump_Criteria"]
+[node name="Arcane-flux2" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(160, 15)
 texture = ExtResource("9_4p0wo")
 
-[node name="Goo_Gun_Criteria" type="Panel" parent="Craft_Panel"]
+[node name="GooGunCriteria" type="Panel" parent="CraftPanel"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 130.0
@@ -221,19 +219,19 @@ offset_bottom = 160.0
 theme = ExtResource("3_ew8hq")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
 
-[node name="Arcane-flux" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+[node name="Arcane-flux" type="Sprite2D" parent="CraftPanel/GooGunCriteria"]
 position = Vector2(60, 15)
 texture = ExtResource("9_4p0wo")
 
-[node name="Lumina3" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+[node name="Lumina3" type="Sprite2D" parent="CraftPanel/GooGunCriteria"]
 position = Vector2(20, 15)
 texture = ExtResource("7_xn8tu")
 
-[node name="Shadonite3" type="Sprite2D" parent="Craft_Panel/Goo_Gun_Criteria"]
+[node name="Shadonite3" type="Sprite2D" parent="CraftPanel/GooGunCriteria"]
 position = Vector2(40, 15)
 texture = ExtResource("8_sfv7n")
 
-[node name="Label4" type="Label" parent="Craft_Panel"]
+[node name="Ts&Cs" type="Label" parent="CraftPanel"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 174.0
@@ -246,3 +244,6 @@ manual for use of authorised equipment."
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="item_clicked" from="CraftPanel/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="item_selected" from="CraftPanel/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="CraftPanel/RequestButton" to="." method="_on_request_button_pressed"]
