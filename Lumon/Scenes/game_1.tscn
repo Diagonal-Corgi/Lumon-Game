@@ -159,6 +159,10 @@ position_smoothing_enabled = true
 position = Vector2(1476, 331)
 id = 1
 
+[node name="portal17" parent="Portals" instance=ExtResource("7_rtgkr")]
+position = Vector2(-4600, 678)
+id = 69
+
 [node name="portal3" parent="Portals" instance=ExtResource("7_rtgkr")]
 modulate = Color(0.774931, 0.48263, 0.147909, 1)
 position = Vector2(1541, 587)
@@ -228,6 +232,10 @@ id = 999
 [node name="portal16" parent="Portals" instance=ExtResource("7_rtgkr")]
 position = Vector2(-1983, 559)
 id = 999
+
+[node name="portal18" parent="Portals" instance=ExtResource("7_rtgkr")]
+position = Vector2(-4675, 678)
+id = 69
 
 [node name="UI" type="Node" parent="."]
 

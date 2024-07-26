@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmmc75uvol4dc"]
+[gd_scene load_steps=10 format=3 uid="uid://cmmc75uvol4dc"]
 
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="1_5dr0l"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="2_yg40m"]
 [ext_resource type="PackedScene" uid="uid://c0kufrfbcixx3" path="res://Scenes/hud.tscn" id="5_fce0o"]
+[ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="7_gqtus"]
 [ext_resource type="Texture2D" uid="uid://b2nlwbckvba2r" path="res://Assets/world-tileset.png" id="11_sxmah"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
 [ext_resource type="PackedScene" uid="uid://c8e1fdhl0frdo" path="res://Scenes/crafting_area.tscn" id="13_c1lbw"]
@@ -75,3 +76,7 @@ texture_scale = 0.05
 
 [node name="Transition" parent="." groups=["transition_game_1"] instance=ExtResource("12_rir2a")]
 position = Vector2(67, 389)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_gqtus")
+autoplay = true
