@@ -40,6 +40,7 @@ theme = ExtResource("3_ew8hq")
 text = "F"
 
 [node name="CraftPanel" type="Panel" parent="."]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

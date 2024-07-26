@@ -132,6 +132,12 @@ func _on_area_2d_area_entered(area):
 		get_tree().change_scene_to_file("res://Scenes/hq.tscn")
 	elif(area.is_in_group("transition_game_1")):
 		get_tree().change_scene_to_file("res://Scenes/game_1.tscn")
+	elif(area.is_in_group("transition_level_1")):
+		get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
+	elif(area.is_in_group("transition_level_2")):
+		get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
+	elif(area.is_in_group("transition_level_3")):
+		get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
 
 # Function to shoot the projectile
 func shoot():

@@ -44,7 +44,6 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(4, 0.5)
 shape = SubResource("RectangleShape2D_j2yul")
 
@@ -53,25 +52,21 @@ modulate = Color(0.878431, 0.941176, 0.909804, 1)
 texture = ExtResource("1_3g1sj")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(15, 0)
 target_position = Vector2(0, 15)
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(15, 0)
-target_position = Vector2(4, 0)
+position = Vector2(16, 7.5)
+target_position = Vector2(13, 0)
 
 [node name="RayCast2D3" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(-8, 0)
+position = Vector2(-8, 7)
 rotation = 3.14159
-target_position = Vector2(4, 0)
+target_position = Vector2(14.5, 3.67165e-05)
 
 [node name="HitBox" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-visible = false
 position = Vector2(4, 0.25)
 shape = SubResource("RectangleShape2D_1x7ey")
 

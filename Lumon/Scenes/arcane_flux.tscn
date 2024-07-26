@@ -107,6 +107,8 @@ _data = {
 radius = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
 mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_w4nxt")
