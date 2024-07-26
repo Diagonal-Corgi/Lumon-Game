@@ -34,7 +34,7 @@ size = Vector2(22, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1x7ey"]
 size = Vector2(24, 16.5)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Drog" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_t3epn")
 

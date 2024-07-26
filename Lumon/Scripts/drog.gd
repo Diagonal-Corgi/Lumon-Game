@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var drog_health = 1
 @onready var player = $"../Player"
 @onready var animation_player = $AnimationPlayer
+@onready var lumina = preload("res://Scenes/lumina.tscn")
 
 var player_position
 var target_position
@@ -62,10 +63,16 @@ func _on_hit_box_area_entered(area):
 	elif area.is_in_group("player_projectile_attack"):
 		take_damage()
 	
+func drop_loot():
+	var loot_instance = lumina.instantiate()
+	loot_instance.position = self.position
+	get_parent().add_child(loot_instance)
 
 func take_damage():
 	if drog_health > 0:
 		animation_player.play("damage_taken")
 		drog_health -= 1
 	elif drog_health == 0:
+		drop_loot()
 		queue_free()
+

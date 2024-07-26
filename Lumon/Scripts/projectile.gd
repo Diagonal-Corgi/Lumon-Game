@@ -26,6 +26,8 @@ func _on_area_2d_area_entered(area):
 	if(area.is_in_group("portal")):
 		if(!area.lock_portal):
 			do_teleport(area)
+	if(area.is_in_group("enemy")):
+		queue_free()
 			
 func do_teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
@@ -38,5 +40,4 @@ func do_teleport(area):
 
 
 func _on_timer_timeout():
-	print("timeout")
 	queue_free()

@@ -5,9 +5,9 @@ var shadonite = 99
 var lumina = 99
 var health = 3
 
-var dash_ability_enabled = false
-var double_jump_ability_enabled = false
-var goo_gun_ability_enabled = false
+var dash_ability_enabled = true
+var double_jump_ability_enabled = true
+var goo_gun_ability_enabled = true
 
 func add_arcane_flux():
 	arcane_flux += 1

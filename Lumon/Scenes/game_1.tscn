@@ -362,3 +362,6 @@ position = Vector2(-1634, 598)
 
 [node name="Health2" parent="." instance=ExtResource("17_wwrj7")]
 position = Vector2(-2957, 604)
+
+[node name="Drog" parent="." instance=ExtResource("11_crael")]
+position = Vector2(-4852, 685)
