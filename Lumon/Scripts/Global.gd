@@ -1,29 +1,31 @@
 extends Node
 
-var arcane_flux = 99
-var shadonite = 99
-var lumina = 99
+var arcane_flux = 0
+var shadonite = 0
+var lumina = 0
 var health = 3
+
+var inventory = {"arcane_flux" : 0, "shadonite" : 0, "lumina" : 0}
 
 var dash_ability_enabled = true
 var double_jump_ability_enabled = true
 var goo_gun_ability_enabled = true
 
-func add_arcane_flux():
-	arcane_flux += 1
-
-func remove_arcane_flux():
-	if arcane_flux > 0:
-		arcane_flux -= 1
-	else:
-		print("Player dead")
 		
-func add_shadonite():
-	shadonite += 1
-	
-func add_lumina():
-	lumina += 1
-	
+func add_item(count: int, item: String):
+	if inventory.has(item):
+		inventory[item] += count
+	else:
+		inventory[item] = count
+
+func remove_item(count: int, item: String):
+	if inventory.has(item):
+		inventory[item] -= count
+		if inventory[item] <= 0:
+			inventory.erase(item)
+	else:
+		print("Item does not exist in inventory")
+		
 func add_health():
 	if health < 5:
 		health += 1

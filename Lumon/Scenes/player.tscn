@@ -1,8 +1,8 @@
-[gd_scene load_steps=46 format=3 uid="uid://ckl4xhjuswana"]
+[gd_scene load_steps=47 format=3 uid="uid://ckl4xhjuswana"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m51qd"]
 [ext_resource type="Texture2D" uid="uid://c02t305qvc6qj" path="res://Assets/player-animations.png" id="2_n2bpi"]
-[ext_resource type="Texture2D" uid="uid://bdajrxwetu6tx" path="res://Assets/portal.png" id="3_k4823"]
+[ext_resource type="Texture2D" uid="uid://ijklkx30seey" path="res://Assets/baton.png" id="4_8534d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4enky"]
 atlas = ExtResource("2_n2bpi")
@@ -287,7 +287,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/path = NodePath("attackshape:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -299,7 +299,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("batonattack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -311,7 +311,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("batonattack:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -323,7 +323,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:scale")
+tracks/3/path = NodePath("attackshape:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -332,18 +332,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0.5, 0.5)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("batonattack:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../RigidBody2D/Sprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_kw4dx"]
 resource_name = "attack"
-length = 0.1
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/path = NodePath("attackshape:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
@@ -351,11 +375,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("batonattack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
@@ -363,11 +387,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("batonattack:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -375,7 +399,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:scale")
+tracks/3/path = NodePath("attackshape:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -383,19 +407,43 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("batonattack:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../RigidBody2D/Sprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_1f5m6"]
 resource_name = "attack_left"
-length = 0.1
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/path = NodePath("attackshape:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
@@ -403,11 +451,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("batonattack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
@@ -415,11 +463,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("batonattack:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -427,7 +475,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape2D:scale")
+tracks/3/path = NodePath("attackshape:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -435,6 +483,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("batonattack:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../RigidBody2D/Sprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qt6xf"]
@@ -450,6 +522,9 @@ size = Vector2(13.7097, 17.9234)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgoxv"]
 size = Vector2(13.7097, 17.9234)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7dgy"]
+radius = 4.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, -1)
 collision_layer = 2
@@ -463,19 +538,25 @@ autoplay = "idle"
 frame = 5
 frame_progress = 0.960158
 
+[node name="PinJoint2D" type="PinJoint2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 3)
+scale = Vector2(0.5, 0.5)
+node_a = NodePath("../..")
+node_b = NodePath("../../RigidBody2D")
+
 [node name="HitBox" type="Area2D" parent="AnimatedSprite2D" groups=["player_melee_attack"]]
 position = Vector2(-0.25, 0.750004)
 scale = Vector2(0.62, 0.809)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HitBox"]
+[node name="attackshape" type="CollisionShape2D" parent="AnimatedSprite2D/HitBox"]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_offpi")
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D/HitBox"]
+[node name="batonattack" type="Sprite2D" parent="AnimatedSprite2D/HitBox"]
 visible = false
-rotation = 1.5708
-scale = Vector2(0.298612, 0.914596)
-texture = ExtResource("3_k4823")
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8534d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D/HitBox"]
 libraries = {
@@ -493,5 +574,17 @@ shape = SubResource("RectangleShape2D_lp7uc")
 position = Vector2(-0.5, 1.50001)
 scale = Vector2(1.24, 1.618)
 shape = SubResource("RectangleShape2D_pgoxv")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(-1, 10)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8534d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_b7dgy")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,4 +1,4 @@
 extends Label
 
 func _process(_delta):
-	text = "x" + str(Global.shadonite)
+	text = "x" + str(Global.inventory["shadonite"])

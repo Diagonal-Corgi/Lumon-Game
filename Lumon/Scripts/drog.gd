@@ -4,7 +4,8 @@ extends CharacterBody2D
 @export var drog_health = 1
 @onready var player = $"../Player"
 @onready var animation_player = $AnimationPlayer
-@onready var lumina = preload("res://Scenes/lumina.tscn")
+const lumina = preload("res://Scenes/lumina.tscn")
+const arcane_flux = preload("res://Scenes/arcane_flux.tscn")
 
 var player_position
 var target_position
@@ -64,9 +65,22 @@ func _on_hit_box_area_entered(area):
 		take_damage()
 	
 func drop_loot():
-	var loot_instance = lumina.instantiate()
-	loot_instance.position = self.position
-	get_parent().add_child(loot_instance)
+	var num_lumina_to_drop = randi() % 3 + 1
+	var num_arcane_to_drop = randi() % 2 + 1
+	
+	for i in range(num_lumina_to_drop):
+		var lumina_instance = lumina.instantiate()
+		# Offset the loot position slightly for each item so they don't stack exactly
+		var offset = Vector2(randi() % 21 - 10, randi() % 60 - 30)  # Random x offset between -10 and 10
+		lumina_instance.position = self.position + offset
+		get_tree().current_scene.call_deferred("add_child", lumina_instance)
+		
+	for i in range(num_arcane_to_drop):
+		var arcane_instance = arcane_flux.instantiate()
+		# Offset the loot position slightly for each item so they don't stack exactly
+		var offset = Vector2(randi() % 21 - 10, randi() % 60 - 30)  # Random x offset between -10 and 10
+		arcane_instance.position = self.position + offset
+		get_tree().current_scene.call_deferred("add_child", arcane_instance)
 
 func take_damage():
 	if drog_health > 0:

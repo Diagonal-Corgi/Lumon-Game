@@ -55,6 +55,7 @@ func _on_request_button_pressed():
 			Global.dash_ability_enabled = true
 			item_list.set_item_text(0, "Acquired")
 			item_list.set_item_disabled(0, true)
+			Global.remove_arcane_flux()
 		"Double Jump":
 			Global.double_jump_ability_enabled = true
 			item_list.set_item_text(1, "Acquired")

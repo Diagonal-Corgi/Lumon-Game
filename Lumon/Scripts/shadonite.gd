@@ -12,5 +12,5 @@ func _process(_delta):
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("player"):
-		Global.add_shadonite()
+		Global.add_item(1, "shadonite")
 		queue_free()
