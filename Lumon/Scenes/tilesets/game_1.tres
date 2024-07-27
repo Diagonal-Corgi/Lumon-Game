@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bo6fnboovamla"]
 
-[ext_resource type="Texture2D" uid="uid://b6efpiq0ccva5" path="res://Assets/world-tileset.png" id="1_147vi"]
+[ext_resource type="Texture2D" uid="uid://c564gco0tqf4m" path="res://Assets/world-tileset.png" id="1_147vi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6k4uq"]
 texture = ExtResource("1_147vi")
@@ -116,6 +116,14 @@ texture = ExtResource("1_147vi")
 2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:5/0/physics_layer_0/angular_velocity = 0.0
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -8, -4, -4, -8, 0)
+5:4/0 = 0
+5:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:4/0/physics_layer_0/angular_velocity = 0.0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:4/0 = 0
+6:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:4/0/physics_layer_0/angular_velocity = 0.0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 1
