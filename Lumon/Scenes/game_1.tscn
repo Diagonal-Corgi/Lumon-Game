@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://brd30kqex7qri"]
+[gd_scene load_steps=18 format=3 uid="uid://brd30kqex7qri"]
 
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="1_32rid"]
+[ext_resource type="Script" path="res://Scripts/game_1.gd" id="1_ic7o0"]
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="2_i306c"]
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_3jxs5"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_481rt"]
@@ -8,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="6_jxxtc"]
 [ext_resource type="PackedScene" uid="uid://bkh5hqdgl8jhb" path="res://Scenes/portal.tscn" id="7_rtgkr"]
 [ext_resource type="PackedScene" uid="uid://cod0q5ymace66" path="res://Scenes/drog.tscn" id="11_crael"]
+[ext_resource type="AudioStream" uid="uid://db3w61wc024hl" path="res://Assets/Music/never_late_smooth_jazz_soft.mp3" id="13_ohubx"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="13_y7hbq"]
 [ext_resource type="PackedScene" uid="uid://dwvh34lmcmv7d" path="res://Scenes/health.tscn" id="17_wwrj7"]
 [ext_resource type="Texture2D" uid="uid://uhr33d6nl83g" path="res://Assets/background.png" id="18_4r5od"]
@@ -69,6 +71,7 @@ _data = {
 
 [node name="tutorial" type="Node2D"]
 modulate = Color(0.601223, 0.601223, 0.601223, 1)
+script = ExtResource("1_ic7o0")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(4, 6)
@@ -238,3 +241,7 @@ offset_right = -4962.0
 offset_bottom = 566.0
 theme = ExtResource("3_3jxs5")
 text = "Portal"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_ohubx")
+autoplay = true

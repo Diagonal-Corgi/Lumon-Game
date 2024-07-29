@@ -18,7 +18,16 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_wd7uq"]
 script = ExtResource("2_yjef8")
 scene = ExtResource("3_62v3l")
-overrides = {}
+overrides = {
+"box_modulate_custom_color": "Color(0, 0, 0, 1)",
+"box_modulate_global_color": "false",
+"box_size": "Vector2(800, 500)",
+"custom_normal_font": "\"res://Fonts/PixelOperator8.ttf\"",
+"name_label_custom_color": "Color(0.822144, 1, 0.265625, 1)",
+"name_label_custom_size": "8.0",
+"name_label_customfont": "\"res://Fonts/PixelOperator8-Bold.ttf\"",
+"portrait_bg_modulate": "Color(0.00131226, 0.335938, 0.281038, 1)"
+}
 
 [sub_resource type="Resource" id="Resource_mx2of"]
 script = ExtResource("2_yjef8")
