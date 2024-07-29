@@ -13,6 +13,14 @@ var is_dragging = false
 var mission_title = ""
 var mission_description = ""
 
+var can_access_terminal_level_1 = false
+
+func check_if_can_access_terminal():
+	if inventory.has("puzzle_1_bottom_left_key") and inventory.has("puzzle_1_bottom_right_key") and inventory.has("puzzle_1_top_left_key") and inventory.has("puzzle_1_top_right_key"):
+		can_access_terminal_level_1 = true
+	else:
+		pass
+
 func set_mission(title: String, description: String):
 	mission_title = title
 	mission_description = description

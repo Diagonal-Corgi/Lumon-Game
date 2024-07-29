@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="3_etj38"]
 [ext_resource type="Script" path="res://Scripts/Shadonite_Label.gd" id="4_8r6cu"]
 [ext_resource type="Script" path="res://Scripts/Lumina_Label.gd" id="5_mv0mj"]
-[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="7_38m8o"]
-[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="8_0y0ys"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Items/Shadonite.png" id="5_qlf4w"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/Items/lumina.png" id="6_aie18"]
 [ext_resource type="Script" path="res://Scripts/Mission_Title.gd" id="10_8pg5x"]
 [ext_resource type="Script" path="res://Scripts/Mission_Description.gd" id="11_353qy"]
 
@@ -305,12 +305,12 @@ texture = ExtResource("3_etj38")
 [node name="Shadonite_Image" type="Sprite2D" parent="Panel2"]
 position = Vector2(817, 52.5)
 scale = Vector2(2, 2)
-texture = ExtResource("7_38m8o")
+texture = ExtResource("5_qlf4w")
 
 [node name="Lumina_Image" type="Sprite2D" parent="Panel2"]
 position = Vector2(818, 87.5)
 scale = Vector2(2, 2)
-texture = ExtResource("8_0y0ys")
+texture = ExtResource("6_aie18")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel2"]
 layout_mode = 1

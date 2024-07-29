@@ -16,9 +16,9 @@ NETWORK
 ",
 "title": "L.U.M.O.N"
 },
-"Mainframe": {
+"Mainframe Fragments": {
 "case_sensitive": true,
-"name": "Mainframe",
+"name": "Mainframe Fragments",
 "text": "Key used to calibrate experimentational areas",
 "title": "Key"
 }

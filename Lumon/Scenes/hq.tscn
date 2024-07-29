@@ -67,17 +67,12 @@ position = Vector2(0, 1)
 stream = ExtResource("7_gqtus")
 autoplay = true
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Player"]
-color = Color(0.329464, 0.210165, 0.385442, 1)
-energy = 0.38
-max_distance = 50.0
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="HUD" parent="Player/Camera2D" instance=ExtResource("5_fce0o")]
 
 [node name="Transition_tutorial" parent="." groups=["transition_tutorial"] instance=ExtResource("12_rir2a")]
-position = Vector2(-240, 800)
+position = Vector2(-241, 671)
 
 [node name="Transition_level_1" parent="." groups=["transition_level_1"] instance=ExtResource("12_rir2a")]
 position = Vector2(1393, 11007)
@@ -122,10 +117,10 @@ theme = ExtResource("8_of28l")
 text = "Area XXX000"
 
 [node name="Training Center2" type="Label" parent="."]
-offset_left = -220.0
-offset_top = 603.0
-offset_right = 2.0
-offset_bottom = 619.0
+offset_left = -223.0
+offset_top = 582.0
+offset_right = -1.0
+offset_bottom = 598.0
 theme = ExtResource("8_of28l")
 text = "Training Center"
 

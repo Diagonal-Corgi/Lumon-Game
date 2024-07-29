@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://3dbwxig0ldgx" path="res://Assets/dash.png" id="4_0jevj"]
 [ext_resource type="Texture2D" uid="uid://buhv234dg75qx" path="res://Assets/double-jump.png" id="5_844l7"]
 [ext_resource type="Texture2D" uid="uid://xg3er7yiukcr" path="res://Assets/goo-gun.png" id="6_7b78t"]
-[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="7_xn8tu"]
-[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="8_sfv7n"]
+[ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/Items/lumina.png" id="7_xn8tu"]
+[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Items/Shadonite.png" id="8_sfv7n"]
 [ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="9_qhgux"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esntc"]

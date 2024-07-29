@@ -1,4 +1,6 @@
+[sound path="res://Assets/Music/zapsplat_cartoon_bubble_pop_multiple_fast_001_40280.mp3" volume="0.0"]
 character (instructor): Alright, this is your first assignment. What you will need to do is\:\
 - Eliminate any anomalies\
-- Re-calibrate the multiversal Mainframe
-character: Mission HQ has told me that parts of the mainframe has gone missing, so you will have to find them and transfuse it back together.
+- Re-calibrate the multiversal Mainframe by collecting Mainframe Fragments
+[sound path="res://Assets/Music/zapsplat_cartoon_bubble_pop_multiple_fast_001_40280.mp3" volume="0.0"]
+character: Mission HQ has told me that parts of the Mainframe have gone missing, so you will have to find them and transfuse it back together.

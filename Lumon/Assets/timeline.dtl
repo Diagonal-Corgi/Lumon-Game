@@ -1,3 +1,4 @@
-[style name="DIALOG"]
+[sound path="res://Assets/Music/zapsplat_cartoon_bubble_pop_multiple_fast_001_40280.mp3" volume="0.0"]
 character (instructor): Hello and welcome to the LUMON onboarding training simulation. Here you will learn skills necessary for your job as **MULTIVERSAL SANITATION SPECIALIST**.
+[sound path="res://Assets/Music/zapsplat_cartoon_bubble_pop_multiple_fast_001_40280.mp3" volume="0.0"]
 character: Please follow the onboarding instructions. Once completed, you will head to our Job HQ where we will provide you some more information regarding your job duties.

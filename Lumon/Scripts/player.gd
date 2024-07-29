@@ -31,6 +31,12 @@ func _ready():
 	
 func _physics_process(delta):
 	# Add the gravity.
+	set_collision_mask_value(9, true)
+	
+	if Input.is_action_just_pressed("ui_down"):
+		set_collision_mask_value(9, false)
+		position.y += 10
+	
 	if Global.health < 1:
 		die()
 
@@ -63,6 +69,9 @@ func _physics_process(delta):
 	if is_on_floor():
 		jump_count = 0
 		is_jumping = false
+	
+	if Input.is_action_just_pressed("ui_down") and not is_on_floor():
+		set_collision_mask_value(9, false)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.	
 		# Handle dash input.

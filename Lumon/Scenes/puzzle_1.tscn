@@ -9,6 +9,57 @@
 [ext_resource type="PackedScene" uid="uid://c5q4ff5t3a7ds" path="res://Scenes/puzzle_1_top_left_key.tscn" id="7_yw2j0"]
 [ext_resource type="Texture2D" uid="uid://cp7bshfneuyc2" path="res://Assets/Puzzle_1/puzzle_1.png" id="8_ah341"]
 
+[sub_resource type="Animation" id="Animation_geayc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("puzzle_1_bottom_right_key:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(611, 158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("puzzle_1_top_right_key:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(589, 661)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("puzzle_1_bottom_left_key:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(279, 418)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("puzzle_1_top_left_key:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(902, 411)]
+}
+
 [sub_resource type="Animation" id="Animation_d7qxn"]
 resource_name = "correct"
 length = 3.0
@@ -73,69 +124,6 @@ tracks/4/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_geayc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("puzzle_1_bottom_right_key:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(611, 158)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("puzzle_1_top_right_key:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(589, 661)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("puzzle_1_bottom_left_key:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(279, 418)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("puzzle_1_top_left_key:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(902, 411)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Puzzle1:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pjp22"]
 _data = {
 "RESET": SubResource("Animation_geayc"),
@@ -148,18 +136,26 @@ script = ExtResource("1_5mlh2")
 [node name="puzzle_1_top_left" parent="." groups=["puzzle_1_top_left"] instance=ExtResource("2_tfgs6")]
 position = Vector2(300, 150)
 scale = Vector2(1.5, 1.5)
+collision_layer = 2048
+collision_mask = 2048
 
 [node name="puzzle_1_top_right" parent="." groups=["puzzle_1_top_right"] instance=ExtResource("2_tfgs6")]
 position = Vector2(900, 150)
 scale = Vector2(1.5, 1.5)
+collision_layer = 2048
+collision_mask = 2048
 
 [node name="puzzle_1_bottom_left" parent="." groups=["puzzle_1_bottom_left"] instance=ExtResource("2_tfgs6")]
 position = Vector2(300, 650)
 scale = Vector2(1.5, 1.5)
+collision_layer = 2048
+collision_mask = 2048
 
 [node name="puzzle_1_bottom_right" parent="." instance=ExtResource("3_f6iv8")]
 position = Vector2(900, 650)
 scale = Vector2(1.5, 1.5)
+collision_layer = 2048
+collision_mask = 2048
 
 [node name="puzzle_1_bottom_right_key" parent="." instance=ExtResource("4_6djym")]
 position = Vector2(611, 158)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjfyat0ry1tox"
-path="res://.godot/imported/Shadonite.png-75c2d9f908d13c138b1d3635e39bdefe.ctex"
+uid="uid://df3qqadnwxw0a"
+path="res://.godot/imported/lumina.png-c5705e5448cb7aa851b487c8cb6ae093.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Shadonite.png"
-dest_files=["res://.godot/imported/Shadonite.png-75c2d9f908d13c138b1d3635e39bdefe.ctex"]
+source_file="res://Assets/Items/lumina.png"
+dest_files=["res://.godot/imported/lumina.png-c5705e5448cb7aa851b487c8cb6ae093.ctex"]
 
 [params]
 

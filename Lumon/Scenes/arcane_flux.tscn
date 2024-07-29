@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhoi3qh3udie5"]
+[gd_scene load_steps=13 format=3 uid="uid://dv6irjvcmqbjc"]
 
 [ext_resource type="Script" path="res://Scripts/arcane_flux.gd" id="1_w4nxt"]
 [ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="2_3stvg"]
@@ -107,7 +107,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj68f"]
 radius = 20.0
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="arcane_flux" type="RigidBody2D"]
 collision_layer = 3
 collision_mask = 3
 mass = 0.5

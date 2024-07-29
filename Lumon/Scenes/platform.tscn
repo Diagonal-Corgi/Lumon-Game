@@ -1,23 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp6xqgwxdxojo"]
+[gd_scene load_steps=3 format=3 uid="uid://bbw4cvwsrf7nd"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qn8pq"]
+[ext_resource type="Texture2D" uid="uid://cugex7u2q34px" path="res://Assets/platform.png" id="1_7apex"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g838"]
-size = Vector2(0.993576, 0.984615)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o215m"]
+size = Vector2(48, 6)
 
-[node name="Platform" type="Node2D"]
-scale = Vector2(10, 0.9)
+[node name="platform" type="AnimatableBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o215m")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(116, 16)
-texture = SubResource("PlaceholderTexture2D_qn8pq")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-1.90735e-06, 0)
-scale = Vector2(116.75, 16.25)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1.6337e-08, 0)
-shape = SubResource("RectangleShape2D_3g838")
+texture = ExtResource("1_7apex")

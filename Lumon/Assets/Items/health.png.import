@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df3qqadnwxw0a"
-path="res://.godot/imported/lumina.png-a791ae662f4d9ffaab000d84090300e2.ctex"
+uid="uid://dyw05ktncw56u"
+path="res://.godot/imported/health.png-276d7d7a546ef155468ebb7a4cd05e67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/lumina.png"
-dest_files=["res://.godot/imported/lumina.png-a791ae662f4d9ffaab000d84090300e2.ctex"]
+source_file="res://Assets/Items/health.png"
+dest_files=["res://.godot/imported/health.png-276d7d7a546ef155468ebb7a4cd05e67.ctex"]
 
 [params]
 

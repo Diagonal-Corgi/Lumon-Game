@@ -4,8 +4,9 @@ extends CharacterBody2D
 @export var drog_health = 1
 @onready var player = $"../Player"
 @onready var animation_player = $AnimationPlayer
-const lumina = preload("res://Scenes/lumina.tscn")
-const arcane_flux = preload("res://Scenes/arcane_flux.tscn")
+const lumina = preload("res://Scenes/lumina_new.tscn")
+const shadonite = preload("res://Scenes/shadonite_new.tscn")
+const arcane_flux = preload("res://Scenes/arcane_flux_new.tscn")
 
 var player_position
 var target_position
