@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_3jxs5"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_481rt"]
 [ext_resource type="PackedScene" uid="uid://c0kufrfbcixx3" path="res://Scenes/hud.tscn" id="5_bmrew"]
-[ext_resource type="AudioStream" uid="uid://ddy2vsf3ed1ou" path="res://Assets/Music/level-music.mp3" id="6_874bg"]
+[ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="6_jxxtc"]
 [ext_resource type="PackedScene" uid="uid://bkh5hqdgl8jhb" path="res://Scenes/portal.tscn" id="7_rtgkr"]
 [ext_resource type="PackedScene" uid="uid://cod0q5ymace66" path="res://Scenes/drog.tscn" id="11_crael"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="13_y7hbq"]
@@ -98,7 +98,7 @@ libraries = {
 }
 
 [node name="Player" parent="." instance=ExtResource("2_i306c")]
-position = Vector2(-5922, 669)
+position = Vector2(-5856, 677)
 
 [node name="PointLight2D2" type="PointLight2D" parent="Player"]
 position = Vector2(1, 1)
@@ -112,13 +112,8 @@ position_smoothing_enabled = true
 
 [node name="HUD" parent="Player/Camera2D" instance=ExtResource("5_bmrew")]
 
-[node name="Background" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(2, 8)
-
-[node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(2, 8)
-stream = ExtResource("6_874bg")
-volume_db = -5.0
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_jxxtc")
 autoplay = true
 
 [node name="Portals" type="Node" parent="."]
@@ -140,6 +135,17 @@ id = 5
 [node name="portal18" parent="Portals" instance=ExtResource("7_rtgkr")]
 position = Vector2(-5031, 589)
 id = 69
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Transition" parent="." groups=["transition_hq"] instance=ExtResource("13_y7hbq")]
+position = Vector2(-6156, 454)
+
+[node name="Health2" parent="." instance=ExtResource("17_wwrj7")]
+position = Vector2(-3855, 621)
+
+[node name="Drog" parent="." instance=ExtResource("11_crael")]
+position = Vector2(-4775, 1521)
 
 [node name="UI" type="Node" parent="."]
 
@@ -232,14 +238,3 @@ offset_right = -4962.0
 offset_bottom = 566.0
 theme = ExtResource("3_3jxs5")
 text = "Portal"
-
-[node name="Items" type="Node" parent="."]
-
-[node name="Transition" parent="." groups=["transition_hq"] instance=ExtResource("13_y7hbq")]
-position = Vector2(-6156, 454)
-
-[node name="Health2" parent="." instance=ExtResource("17_wwrj7")]
-position = Vector2(-3855, 621)
-
-[node name="Drog" parent="." instance=ExtResource("11_crael")]
-position = Vector2(-4775, 1521)

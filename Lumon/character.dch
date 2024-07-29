@@ -1,0 +1,246 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"_translation_id": "",
+"color": Color(0.29068, 0.992188, 0.844213, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "DIALOG"
+},
+"default_portrait": "instructor",
+"description": "",
+"display_name": "Instructor",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"Shadonite": {
+"export_overrides": {
+"image": "\"res://Assets/Shadonite.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"White-Light-Transparent": {
+"export_overrides": {
+"image": "\"res://Assets/White-Light-Transparent.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"arcane-flux": {
+"export_overrides": {
+"image": "\"res://Assets/arcane-flux.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"background": {
+"export_overrides": {
+"image": "\"res://Assets/background.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"baton": {
+"export_overrides": {
+"image": "\"res://Assets/baton.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"crafting-area": {
+"export_overrides": {
+"image": "\"res://Assets/crafting-area.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"cursor": {
+"export_overrides": {
+"image": "\"res://Assets/cursor.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"dash": {
+"export_overrides": {
+"image": "\"res://Assets/dash.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"digaonalcorgi-logo": {
+"export_overrides": {
+"image": "\"res://Assets/digaonalcorgi-logo.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"double-jump": {
+"export_overrides": {
+"image": "\"res://Assets/double-jump.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"drog": {
+"export_overrides": {
+"image": "\"res://Assets/drog.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"exit-door": {
+"export_overrides": {
+"image": "\"res://Assets/exit-door.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"goo-gun": {
+"export_overrides": {
+"image": "\"res://Assets/goo-gun.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"health": {
+"export_overrides": {
+"image": "\"res://Assets/health.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"health-empty": {
+"export_overrides": {
+"image": "\"res://Assets/health-empty.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"instructor": {
+"export_overrides": {
+"image": "\"res://Assets/instructor.png\""
+},
+"ignore_char_scale": true,
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"larkonite": {
+"export_overrides": {
+"image": "\"res://Assets/larkonite.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"lumina": {
+"export_overrides": {
+"image": "\"res://Assets/lumina.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"lumon-banner": {
+"export_overrides": {
+"image": "\"res://Assets/lumon-banner.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"lumon-inc": {
+"export_overrides": {
+"image": "\"res://Assets/lumon-inc.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"player": {
+"export_overrides": {
+"image": "\"res://Assets/player.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"player-animations": {
+"export_overrides": {
+"image": "\"res://Assets/player-animations.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"portal": {
+"export_overrides": {
+"image": "\"res://Assets/portal.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"portal-particle-effect": {
+"export_overrides": {
+"image": "\"res://Assets/portal-particle-effect.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"world-tileset": {
+"export_overrides": {
+"image": "\"res://Assets/world-tileset.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}

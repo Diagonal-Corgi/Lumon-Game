@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://sc56yy0si80d"]
+[gd_scene load_steps=9 format=3 uid="uid://sc56yy0si80d"]
 
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="1_opf7t"]
 [ext_resource type="Texture2D" uid="uid://bnlt066xigywy" path="res://Assets/lumon-inc.png" id="2_op5mn"]
 [ext_resource type="Script" path="res://Scripts/Sign_Button.gd" id="3_fves0"]
+[ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="4_ux2d0"]
+[ext_resource type="AudioStream" uid="uid://b0nt34cigplji" path="res://Assets/Music/zapsplat_multimedia_button_press_plastic_click_001_36868.mp3" id="5_jdjtu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8agr"]
 bg_color = Color(0.6, 0.6, 0.6, 0.121569)
@@ -286,6 +288,11 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MarginContainer"]
+position = Vector2(444, 417)
+stream = ExtResource("4_ux2d0")
+autoplay = true
+
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
 
@@ -329,8 +336,6 @@ offset_right = 1089.0
 offset_bottom = 2469.0
 theme_override_font_sizes/font_size = 16
 text = "Dear Candidate #8483291,
-
-Thank you again for completing and returning the application form  for 
 
 We are thrilled to extend an offer of employment for the position of 
 **MULTIVERSAL RESEARCH SANITATION SPECIALIST**
@@ -378,6 +383,9 @@ theme_override_colors/font_color = Color(0.705882, 0.647059, 0.415686, 1)
 theme_override_font_sizes/font_size = 32
 text = "SIGN HERE"
 script = ExtResource("3_fves0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/Panel/Sign_Button"]
+stream = ExtResource("5_jdjtu")
 
 [node name="Panel" type="Panel" parent="MarginContainer/Panel"]
 layout_mode = 0

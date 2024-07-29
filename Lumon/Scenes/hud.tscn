@@ -347,7 +347,7 @@ offset_right = 564.0
 offset_bottom = 25.0
 theme = ExtResource("1_wel6p")
 theme_override_font_sizes/font_size = 16
-text = "Mission Objective:"
+text = "Job Order: Onboarding"
 
 [node name="Mission_Description" type="Label" parent="Panel2"]
 layout_mode = 0
@@ -357,8 +357,7 @@ offset_right = 861.0
 offset_bottom = 98.0
 theme = ExtResource("1_wel6p")
 theme_override_colors/font_color = Color(0.658824, 0.752941, 0.690196, 1)
-text = "Mission Description
-"
+text = "Complete Training Simulation"
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0n1pu")

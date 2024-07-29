@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://gvh50e1btqef"]
+[gd_scene load_steps=13 format=3 uid="uid://gvh50e1btqef"]
 
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="1_twi18"]
 [ext_resource type="Script" path="res://Scripts/StartButton.gd" id="2_5bm2d"]
 [ext_resource type="Texture2D" uid="uid://7nxx2jbta8qt" path="res://Assets/lumon-banner.png" id="3_ga7vl"]
 [ext_resource type="Texture2D" uid="uid://dojctv10gyqxh" path="res://Assets/portal-particle-effect.png" id="3_k1p1n"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="4_24176"]
-[ext_resource type="AudioStream" uid="uid://ddy2vsf3ed1ou" path="res://Assets/Music/level-music.mp3" id="6_5hyw7"]
+[ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="6_2n216"]
+[ext_resource type="AudioStream" uid="uid://b0nt34cigplji" path="res://Assets/Music/zapsplat_multimedia_button_press_plastic_click_001_36868.mp3" id="6_s8npf"]
+[ext_resource type="AudioStream" uid="uid://bgn8hexbhb8d4" path="res://Assets/Music/audio_hero_Triads_SIPML_J-0316.mp3" id="7_jv3p7"]
 
 [sub_resource type="GDScript" id="GDScript_o1wx4"]
 script/source = "extends MarginContainer
@@ -13,7 +15,7 @@ script/source = "extends MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation_player.play(\"music_main_menu\")
+	pass
 "
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xgdef"]
@@ -291,43 +293,6 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
-[sub_resource type="Animation" id="Animation_vsxel"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:pitch_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_7iu1b"]
-resource_name = "music_main_menu"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:pitch_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.7, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7m0ea"]
-_data = {
-"RESET": SubResource("Animation_vsxel"),
-"music_main_menu": SubResource("Animation_7iu1b")
-}
-
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -396,6 +361,9 @@ Start
 "
 script = ExtResource("2_5bm2d")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/HBoxContainer/Title/MenuOptions/StartButton"]
+stream = ExtResource("6_s8npf")
+
 [node name="Credit" type="Label" parent="MarginContainer/HBoxContainer/Title/MenuOptions"]
 layout_mode = 2
 text = "DiagonalCorgi
@@ -411,13 +379,14 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_5hyw7")
-volume_db = 5.0
+stream = ExtResource("6_2n216")
+volume_db = -5.0
+pitch_scale = 0.7
 autoplay = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7m0ea")
-}
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jv3p7")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Title/MenuOptions/StartButton" to="MarginContainer/HBoxContainer/Title/MenuOptions/StartButton" method="_on_pressed"]

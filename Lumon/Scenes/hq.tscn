@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="1_5dr0l"]
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="1_i35iy"]
-[ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="2_yg40m"]
 [ext_resource type="PackedScene" uid="uid://c0kufrfbcixx3" path="res://Scenes/hud.tscn" id="5_fce0o"]
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="7_gqtus"]
+[ext_resource type="AudioStream" uid="uid://8g7ynsassahw" path="res://Assets/Music/difficult_desicions.mp3" id="8_bxg23"]
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="8_of28l"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
 [ext_resource type="PackedScene" uid="uid://c8e1fdhl0frdo" path="res://Scenes/crafting_area.tscn" id="13_c1lbw"]
@@ -23,12 +23,15 @@ position = Vector2(985, 801)
 [node name="Player" parent="." instance=ExtResource("1_5dr0l")]
 position = Vector2(209, 815)
 
-[node name="PointLight2D2" type="PointLight2D" parent="Player"]
-position = Vector2(1, 1)
-scale = Vector2(9.94541, 7.88172)
-energy = 0.5
-texture = ExtResource("2_yg40m")
-texture_scale = 0.05
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(0, 1)
+stream = ExtResource("7_gqtus")
+autoplay = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Player"]
+color = Color(0.329464, 0.210165, 0.385442, 1)
+energy = 0.38
+max_distance = 50.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -45,10 +48,6 @@ position = Vector2(1392, 11008)
 
 [node name="Transition_level_3" parent="." groups=["transition_level_3"] instance=ExtResource("12_rir2a")]
 position = Vector2(1968, 10879)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_gqtus")
-autoplay = true
 
 [node name="Training Center" type="Label" parent="."]
 offset_left = 1419.0
@@ -84,9 +83,13 @@ theme = ExtResource("8_of28l")
 text = "Area XXX000"
 
 [node name="Training Center2" type="Label" parent="."]
-offset_left = -223.0
-offset_top = 608.0
-offset_right = -1.0
-offset_bottom = 624.0
+offset_left = -220.0
+offset_top = 603.0
+offset_right = 2.0
+offset_bottom = 619.0
 theme = ExtResource("8_of28l")
 text = "Training Center"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bxg23")
+autoplay = true
