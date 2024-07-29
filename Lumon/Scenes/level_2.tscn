@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://blqjh246leyyo"]
+[gd_scene load_steps=17 format=3 uid="uid://blqjh246leyyo"]
 
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="1_6b5th"]
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="2_n6ytr"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="5_pipkx"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="6_tqh0y"]
 [ext_resource type="Texture2D" uid="uid://uhr33d6nl83g" path="res://Assets/background.png" id="7_wwmcd"]
+[ext_resource type="AudioStream" uid="uid://dnypfa1hhib4p" path="res://Assets/Music/music_zapsplat_quiz_bed_long_space_race.mp3" id="8_bnhuo"]
 
 [sub_resource type="Animation" id="Animation_8tqgm"]
 length = 0.001
@@ -21,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_t3w83"]
@@ -40,10 +53,39 @@ tracks/0/keys = {
 "values": [Vector2(2, 2), Vector2(2.5, 2.5), Vector2(2, 2), Vector2(1.5, 1.5)]
 }
 
+[sub_resource type="Animation" id="Animation_6wqnx"]
+resource_name = "music"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mmv8e"]
 _data = {
 "RESET": SubResource("Animation_8tqgm"),
-"level_scale": SubResource("Animation_t3w83")
+"level_scale": SubResource("Animation_t3w83"),
+"music": SubResource("Animation_6wqnx")
 }
 
 [sub_resource type="GDScript" id="GDScript_4dxfv"]
@@ -113,6 +155,7 @@ layer_0/tile_data = PackedInt32Array(786428, 65536, 0, 851964, 65536, 1, 917500,
 libraries = {
 "": SubResource("AnimationLibrary_mmv8e")
 }
+autoplay = "music"
 
 [node name="Player" parent="." instance=ExtResource("2_n6ytr")]
 position = Vector2(-41, -68)
@@ -156,3 +199,8 @@ centered = false
 libraries = {
 "": SubResource("AnimationLibrary_3dwud")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bnhuo")
+volume_db = -20.511
+stream_paused = true

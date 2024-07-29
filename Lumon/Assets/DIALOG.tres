@@ -21,7 +21,6 @@ scene = ExtResource("3_62v3l")
 overrides = {
 "box_modulate_custom_color": "Color(0, 0, 0, 1)",
 "box_modulate_global_color": "false",
-"box_size": "Vector2(800, 500)",
 "custom_normal_font": "\"res://Fonts/PixelOperator8.ttf\"",
 "name_label_custom_color": "Color(0.822144, 1, 0.265625, 1)",
 "name_label_custom_size": "8.0",

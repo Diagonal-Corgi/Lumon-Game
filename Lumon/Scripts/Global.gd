@@ -10,6 +10,9 @@ var inventory = {"arcane_flux" : 0, "shadonite" : 0, "lumina" : 0}
 var dash_ability_enabled = true
 var double_jump_ability_enabled = true
 var goo_gun_ability_enabled = true
+var tutorial_completed = false
+var onboarding_completed = false
+var is_dragging = false
 
 		
 func add_item(count: int, item: String):

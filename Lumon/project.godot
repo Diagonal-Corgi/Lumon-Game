@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lumon"
-run/main_scene="res://Scenes/main_menu.tscn"
+run/main_scene="res://Scenes/droppable_test.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.188235, 0.188235, 1)
 boot_splash/image="res://Assets/digaonalcorgi-logo.png"
@@ -30,6 +30,7 @@ directories/dch_directory={
 "character": "res://character.dch"
 }
 directories/dtl_directory={
+"HQ_01": "res://HQ_01.dtl",
 "timeline": "res://Assets/timeline.dtl"
 }
 layout/style_list=["res://Assets/DIALOG.tres"]
@@ -144,6 +145,11 @@ dialogic_default_action={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+click={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(166, 13),"global_position":Vector2(170, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 

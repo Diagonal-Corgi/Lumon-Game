@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://7fwp38o456p7"]
+
+[ext_resource type="Script" path="res://Scripts/droppable.gd" id="1_uc1d6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywfp"]
+size = Vector2(128, 128)
+
+[node name="droppable_option" type="StaticBody2D" groups=["droppable"]]
+script = ExtResource("1_uc1d6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iywfp")
+debug_color = Color(0, 0.6, 0.701961, 0.654902)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0.251269, 0.346916, 0.671824, 1)

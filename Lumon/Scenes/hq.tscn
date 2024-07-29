@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmmc75uvol4dc"]
+[gd_scene load_steps=13 format=3 uid="uid://cmmc75uvol4dc"]
 
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="1_5dr0l"]
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="1_i35iy"]
+[ext_resource type="Script" path="res://Scripts/hq.gd" id="1_ydr0h"]
 [ext_resource type="PackedScene" uid="uid://c0kufrfbcixx3" path="res://Scenes/hud.tscn" id="5_fce0o"]
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="7_gqtus"]
 [ext_resource type="AudioStream" uid="uid://8g7ynsassahw" path="res://Assets/Music/difficult_desicions.mp3" id="8_bxg23"]
@@ -9,7 +10,45 @@
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
 [ext_resource type="PackedScene" uid="uid://c8e1fdhl0frdo" path="res://Scenes/crafting_area.tscn" id="13_c1lbw"]
 
+[sub_resource type="Animation" id="Animation_rhrqf"]
+resource_name = "music"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_j6ui6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1cj7h"]
+_data = {
+"RESET": SubResource("Animation_j6ui6"),
+"music": SubResource("Animation_rhrqf")
+}
+
 [node name="HQ" type="Node2D"]
+script = ExtResource("1_ydr0h")
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(2, 2)
@@ -92,4 +131,11 @@ text = "Training Center"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_bxg23")
+volume_db = -10.0
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1cj7h")
+}
+autoplay = "music"
