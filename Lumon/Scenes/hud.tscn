@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0kufrfbcixx3"]
+[gd_scene load_steps=14 format=3 uid="uid://c0kufrfbcixx3"]
 
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_drsy1"]
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="1_wel6p"]
 [ext_resource type="PackedScene" uid="uid://c0086j8v7nqf1" path="res://Scenes/health_bar.tscn" id="2_di5hg"]
 [ext_resource type="Script" path="res://Scripts/Arcane_Flux_Label.gd" id="3_856jd"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="3_etj38"]
 [ext_resource type="Script" path="res://Scripts/Shadonite_Label.gd" id="4_8r6cu"]
 [ext_resource type="Script" path="res://Scripts/Lumina_Label.gd" id="5_mv0mj"]
-[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="6_3j1q5"]
 [ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="7_38m8o"]
 [ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="8_0y0ys"]
+[ext_resource type="Script" path="res://Scripts/Mission_Title.gd" id="10_8pg5x"]
+[ext_resource type="Script" path="res://Scripts/Mission_Description.gd" id="11_353qy"]
 
 [sub_resource type="Shader" id="Shader_hfrom"]
 code = "/*
@@ -268,6 +271,7 @@ shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_drsy1")
 
 [node name="Panel2" type="Panel" parent="."]
 anchors_preset = -1
@@ -282,13 +286,21 @@ grow_horizontal = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_wel6p")
 
+[node name="Label" type="Label" parent="Panel2"]
+layout_mode = 2
+offset_left = 27.9996
+offset_top = 11.0
+offset_right = 192.0
+offset_bottom = 27.0
+text = "Health"
+
 [node name="HealthBar" parent="Panel2" instance=ExtResource("2_di5hg")]
 position = Vector2(34, 57)
 
 [node name="Arcane_Flux_Image" type="Sprite2D" parent="Panel2"]
 position = Vector2(818.004, 18)
 scale = Vector2(2, 2)
-texture = ExtResource("6_3j1q5")
+texture = ExtResource("3_etj38")
 
 [node name="Shadonite_Image" type="Sprite2D" parent="Panel2"]
 position = Vector2(817, 52.5)
@@ -348,6 +360,7 @@ offset_bottom = 25.0
 theme = ExtResource("1_wel6p")
 theme_override_font_sizes/font_size = 16
 text = "Job Order: Onboarding"
+script = ExtResource("10_8pg5x")
 
 [node name="Mission_Description" type="Label" parent="Panel2"]
 layout_mode = 0
@@ -358,6 +371,7 @@ offset_bottom = 98.0
 theme = ExtResource("1_wel6p")
 theme_override_colors/font_color = Color(0.658824, 0.752941, 0.690196, 1)
 text = "Complete Training Simulation"
+script = ExtResource("11_353qy")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0n1pu")
@@ -367,4 +381,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 0)
+color = Color(0.180392, 0.2, 0.227451, 1)

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="DialogicGlossary" load_steps=2 format=3 uid="uid://blrikvitniur5"]
+
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Glossary/glossary_resource.gd" id="1_5yf0q"]
+
+[resource]
+script = ExtResource("1_5yf0q")
+entries = {
+"LUMON": {
+"case_sensitive": false,
+"name": "LUMON",
+"text": "LIMINAL
+UNIVERSE
+MITIGATION
+OBSERVATION
+NETWORK
+",
+"title": "L.U.M.O.N"
+},
+"Mainframe": {
+"case_sensitive": true,
+"name": "Mainframe",
+"text": "Key used to calibrate experimentational areas",
+"title": "Key"
+}
+}
+enabled = true
+_translation_id = ""
+_translation_keys = {}

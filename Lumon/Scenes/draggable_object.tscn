@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0t1j6d542f4q"]
 
 [ext_resource type="Script" path="res://Scripts/draggable_object.gd" id="1_mlo2o"]
-[ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="2_fuvhw"]
+[ext_resource type="Texture2D" uid="uid://c3ms4tfiljxmu" path="res://Assets/Puzzle_1/puzzle_1_bottom_left.png" id="2_l34nd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_185rf"]
 
@@ -10,9 +10,10 @@ scale = Vector2(4, 4)
 script = ExtResource("1_mlo2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fuvhw")
+texture = ExtResource("2_l34nd")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_185rf")

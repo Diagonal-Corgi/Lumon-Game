@@ -1,0 +1,185 @@
+[gd_scene load_steps=12 format=3 uid="uid://4sh0s1ax3pjx"]
+
+[ext_resource type="Script" path="res://Scripts/droppable_test.gd" id="1_5mlh2"]
+[ext_resource type="PackedScene" uid="uid://7fwp38o456p7" path="res://Scenes/droppable.tscn" id="2_tfgs6"]
+[ext_resource type="PackedScene" uid="uid://cy2bdp4orebnh" path="res://Scenes/puzzle_1_bottom_right.tscn" id="3_f6iv8"]
+[ext_resource type="PackedScene" uid="uid://bwdtg18h73wl8" path="res://Scenes/puzzle_1_bottom_right_key.tscn" id="4_6djym"]
+[ext_resource type="PackedScene" uid="uid://d3pbg36qb3vuc" path="res://Scenes/puzzle_1_bottom_left_key.tscn" id="5_bpbuw"]
+[ext_resource type="PackedScene" uid="uid://huqhauk5e4h3" path="res://Scenes/puzzle_1_top_right_key.tscn" id="6_hid75"]
+[ext_resource type="PackedScene" uid="uid://c5q4ff5t3a7ds" path="res://Scenes/puzzle_1_top_left_key.tscn" id="7_yw2j0"]
+[ext_resource type="Texture2D" uid="uid://cp7bshfneuyc2" path="res://Assets/Puzzle_1/puzzle_1.png" id="8_ah341"]
+
+[sub_resource type="Animation" id="Animation_d7qxn"]
+resource_name = "correct"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("puzzle_1_bottom_right_key:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(900, 650), Vector2(684, 467)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("puzzle_1_top_right_key:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(900, 150), Vector2(684, 339)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("puzzle_1_bottom_left_key:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 650), Vector2(556, 467)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("puzzle_1_top_left_key:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 150), Vector2(556, 339)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Puzzle1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_geayc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("puzzle_1_bottom_right_key:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(611, 158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("puzzle_1_top_right_key:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(589, 661)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("puzzle_1_bottom_left_key:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(279, 418)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("puzzle_1_top_left_key:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(902, 411)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Puzzle1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pjp22"]
+_data = {
+"RESET": SubResource("Animation_geayc"),
+"correct": SubResource("Animation_d7qxn")
+}
+
+[node name="puzzle_1" type="Node2D"]
+script = ExtResource("1_5mlh2")
+
+[node name="puzzle_1_top_left" parent="." groups=["puzzle_1_top_left"] instance=ExtResource("2_tfgs6")]
+position = Vector2(300, 150)
+scale = Vector2(1.5, 1.5)
+
+[node name="puzzle_1_top_right" parent="." groups=["puzzle_1_top_right"] instance=ExtResource("2_tfgs6")]
+position = Vector2(900, 150)
+scale = Vector2(1.5, 1.5)
+
+[node name="puzzle_1_bottom_left" parent="." groups=["puzzle_1_bottom_left"] instance=ExtResource("2_tfgs6")]
+position = Vector2(300, 650)
+scale = Vector2(1.5, 1.5)
+
+[node name="puzzle_1_bottom_right" parent="." instance=ExtResource("3_f6iv8")]
+position = Vector2(900, 650)
+scale = Vector2(1.5, 1.5)
+
+[node name="puzzle_1_bottom_right_key" parent="." instance=ExtResource("4_6djym")]
+position = Vector2(611, 158)
+
+[node name="puzzle_1_bottom_left_key" parent="." instance=ExtResource("5_bpbuw")]
+position = Vector2(279, 418)
+
+[node name="puzzle_1_top_right_key" parent="." instance=ExtResource("6_hid75")]
+position = Vector2(589, 661)
+
+[node name="puzzle_1_top_left_key" parent="." instance=ExtResource("7_yw2j0")]
+position = Vector2(902, 411)
+
+[node name="Puzzle1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(620, 403)
+scale = Vector2(5, 5)
+texture = ExtResource("8_ah341")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pjp22")
+}

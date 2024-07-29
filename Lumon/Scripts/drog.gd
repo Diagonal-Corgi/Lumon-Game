@@ -58,7 +58,6 @@ func _on_area_2d_area_entered(area):
 func _on_hit_box_area_entered(area):
 	if area.is_in_group("player"):
 		Global.remove_health()
-		print("Player Damaged")
 	elif area.is_in_group("player_melee_attack"):
 		take_damage()
 	elif area.is_in_group("player_projectile_attack"):

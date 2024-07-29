@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fuxmh1rkkxau"
-path="res://.godot/imported/arcane-flux.png-38a957a89ed2d503feec91a4a1862713.ctex"
+uid="uid://cp7bshfneuyc2"
+path="res://.godot/imported/puzzle_1.png-c1c536e13c0ab6ca144292275b086557.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/arcane-flux.png"
-dest_files=["res://.godot/imported/arcane-flux.png-38a957a89ed2d503feec91a4a1862713.ctex"]
+source_file="res://Assets/Puzzle_1/puzzle_1.png"
+dest_files=["res://.godot/imported/puzzle_1.png-c1c536e13c0ab6ca144292275b086557.ctex"]
 
 [params]
 

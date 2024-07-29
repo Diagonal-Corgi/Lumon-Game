@@ -36,7 +36,9 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_reqlc"]
 script = ExtResource("2_yjef8")
 scene = ExtResource("5_4oltp")
-overrides = {}
+overrides = {
+"font_custom": "\"res://Fonts/PixelOperator8-Bold.ttf\""
+}
 
 [sub_resource type="Resource" id="Resource_s76ml"]
 script = ExtResource("2_yjef8")
@@ -60,4 +62,4 @@ base_overrides = {
 "global_bg_color": "Color(0.298039, 0.2, 0.113725, 0.901961)"
 }
 layers = Array[ExtResource("2_yjef8")]([SubResource("Resource_xoefw"), SubResource("Resource_wd7uq"), SubResource("Resource_mx2of"), SubResource("Resource_reqlc"), SubResource("Resource_s76ml"), SubResource("Resource_y4lai"), SubResource("Resource_68ljl")])
-metadata/_latest_layer = 1
+metadata/_latest_layer = 3

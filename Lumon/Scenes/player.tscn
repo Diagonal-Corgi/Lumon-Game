@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://ckl4xhjuswana"]
+[gd_scene load_steps=48 format=3 uid="uid://ckl4xhjuswana"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m51qd"]
 [ext_resource type="Texture2D" uid="uid://c02t305qvc6qj" path="res://Assets/player-animations.png" id="2_n2bpi"]
 [ext_resource type="Texture2D" uid="uid://ijklkx30seey" path="res://Assets/baton.png" id="4_8534d"]
+[ext_resource type="AudioStream" uid="uid://bjo68400mekro" path="res://Assets/Music/zapsplat_sound_design_electricity_zap_spark_28906.mp3" id="4_gcrkl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4enky"]
 atlas = ExtResource("2_n2bpi")
@@ -280,7 +281,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_offpi"]
-size = Vector2(13.8508, 7.72559)
+size = Vector2(3.07925, 2.6267)
 
 [sub_resource type="Animation" id="Animation_6smgf"]
 length = 0.001
@@ -545,8 +546,8 @@ node_a = NodePath("../..")
 node_b = NodePath("../../RigidBody2D")
 
 [node name="HitBox" type="Area2D" parent="AnimatedSprite2D" groups=["player_melee_attack"]]
-position = Vector2(-0.25, 0.750004)
-scale = Vector2(0.62, 0.809)
+position = Vector2(-1, 1)
+scale = Vector2(0.52, 0.809)
 
 [node name="attackshape" type="CollisionShape2D" parent="AnimatedSprite2D/HitBox"]
 scale = Vector2(0.5, 0.5)
@@ -562,6 +563,10 @@ texture = ExtResource("4_8534d")
 libraries = {
 "": SubResource("AnimationLibrary_qt6xf")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite2D/HitBox"]
+stream = ExtResource("4_gcrkl")
+volume_db = -10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1.50001)

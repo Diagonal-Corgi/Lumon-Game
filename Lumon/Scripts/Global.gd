@@ -1,18 +1,21 @@
 extends Node
 
-var arcane_flux = 0
-var shadonite = 0
-var lumina = 0
 var health = 3
 
 var inventory = {"arcane_flux" : 0, "shadonite" : 0, "lumina" : 0}
 
-var dash_ability_enabled = true
-var double_jump_ability_enabled = true
-var goo_gun_ability_enabled = true
+var dash_ability_enabled = false
+var double_jump_ability_enabled = false
+var goo_gun_ability_enabled = false
 var tutorial_completed = false
 var onboarding_completed = false
 var is_dragging = false
+var mission_title = ""
+var mission_description = ""
+
+func set_mission(title: String, description: String):
+	mission_title = title
+	mission_description = description
 
 		
 func add_item(count: int, item: String):

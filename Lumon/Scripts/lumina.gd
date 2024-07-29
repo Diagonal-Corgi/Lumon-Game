@@ -1,5 +1,5 @@
 extends RigidBody2D
-
+@onready var audio_stream_player = $Area2D/AudioStreamPlayer
 @onready var animation_player = $AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,4 +13,5 @@ func _process(_delta):
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("player"):
 		Global.add_item(1, "lumina")
+		audio_stream_player.play()
 		queue_free()

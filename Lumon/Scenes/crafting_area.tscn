@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://xg3er7yiukcr" path="res://Assets/goo-gun.png" id="6_7b78t"]
 [ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="7_xn8tu"]
 [ext_resource type="Texture2D" uid="uid://cjfyat0ry1tox" path="res://Assets/Shadonite.png" id="8_sfv7n"]
-[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="9_4p0wo"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="9_qhgux"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esntc"]
 size = Vector2(82.2718, 25.8533)
@@ -197,19 +197,19 @@ texture = ExtResource("7_xn8tu")
 
 [node name="Arcane-flux" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(100, 15)
-texture = ExtResource("9_4p0wo")
+texture = ExtResource("9_qhgux")
 
 [node name="Arcane-flux3" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(120, 15)
-texture = ExtResource("9_4p0wo")
+texture = ExtResource("9_qhgux")
 
 [node name="Arcane-flux4" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(140, 15)
-texture = ExtResource("9_4p0wo")
+texture = ExtResource("9_qhgux")
 
 [node name="Arcane-flux2" type="Sprite2D" parent="CraftPanel/DoubleJumpCriteria"]
 position = Vector2(160, 15)
-texture = ExtResource("9_4p0wo")
+texture = ExtResource("9_qhgux")
 
 [node name="GooGunCriteria" type="Panel" parent="CraftPanel"]
 layout_mode = 0
@@ -222,7 +222,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_40mwh")
 
 [node name="Arcane-flux" type="Sprite2D" parent="CraftPanel/GooGunCriteria"]
 position = Vector2(60, 15)
-texture = ExtResource("9_4p0wo")
+texture = ExtResource("9_qhgux")
 
 [node name="Lumina3" type="Sprite2D" parent="CraftPanel/GooGunCriteria"]
 position = Vector2(20, 15)

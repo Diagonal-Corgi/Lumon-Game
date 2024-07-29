@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var animation_player = $AnimatedSprite2D/HitBox/AnimationPlayer
 var ProjectileScene = preload("res://Scenes/projectile.tscn")
+@onready var attack_noise = $AnimatedSprite2D/HitBox/AudioStreamPlayer
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -290.0
@@ -30,6 +31,8 @@ func _ready():
 	
 func _physics_process(delta):
 	# Add the gravity.
+	if Global.health < 1:
+		die()
 
 	if velocity.x == 0 && velocity.y == 0 :
 		animated_sprite_2d.play("idle")
@@ -41,16 +44,22 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_attack()
-	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
-		velocity.y = JUMP_VELOCITY / 4
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and jump_count < max_jumps:
-		velocity.y = JUMP_VELOCITY	
-		jump_count += 1
-		if is_dashing == false:
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY 
 			animated_sprite_2d.play("jump")
-		if is_jumping && !is_on_floor():
-			animated_sprite_2d.play("double_jump")
+			jump_count = 1
+			is_jumping = true
+		elif jump_count < max_jumps and Global.double_jump_ability_enabled:
+			velocity.y = JUMP_VELOCITY 
+			jump_count += 1
+		if is_dashing == false:
+			if jump_count == 2:
+				animated_sprite_2d.play("double_jump")
+			else:
+				animated_sprite_2d.play("jump")
+
 	if is_on_floor():
 		jump_count = 0
 		is_jumping = false
@@ -130,8 +139,8 @@ func _on_area_2d_area_entered(area):
 			do_teleport(area)
 	elif(area.is_in_group("transition_hq")):
 		get_tree().change_scene_to_file("res://Scenes/hq.tscn")
-	elif(area.is_in_group("transition_game_1")):
-		get_tree().change_scene_to_file("res://Scenes/game_1.tscn")
+	elif(area.is_in_group("transition_tutorial")):
+		get_tree().change_scene_to_file("res://Scenes/tutorial.tscn")
 	elif(area.is_in_group("transition_level_1")):
 		get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
 	elif(area.is_in_group("transition_level_2")):
@@ -164,6 +173,11 @@ func shoot():
 func melee_attack():
 	if animated_sprite_2d.flip_h == true:
 		animation_player.play("attack_left")
+		attack_noise.play()
 	elif animated_sprite_2d.flip_h == false:
 		animation_player.play("attack")
+		attack_noise.play()
 	
+func die():
+	get_tree().reload_current_scene()
+	Global.health = 3

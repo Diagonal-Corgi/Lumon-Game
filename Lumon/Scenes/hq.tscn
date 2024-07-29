@@ -10,6 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
 [ext_resource type="PackedScene" uid="uid://c8e1fdhl0frdo" path="res://Scenes/crafting_area.tscn" id="13_c1lbw"]
 
+[sub_resource type="Animation" id="Animation_j6ui6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:autoplay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_rhrqf"]
 resource_name = "music"
 length = 5.0
@@ -24,21 +39,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_j6ui6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:autoplay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1cj7h"]
@@ -76,14 +76,14 @@ max_distance = 50.0
 
 [node name="HUD" parent="Player/Camera2D" instance=ExtResource("5_fce0o")]
 
-[node name="Transition_tutorial" parent="." groups=["transition_game_1"] instance=ExtResource("12_rir2a")]
+[node name="Transition_tutorial" parent="." groups=["transition_tutorial"] instance=ExtResource("12_rir2a")]
 position = Vector2(-240, 800)
 
 [node name="Transition_level_1" parent="." groups=["transition_level_1"] instance=ExtResource("12_rir2a")]
-position = Vector2(1392, 10879)
+position = Vector2(1393, 11007)
 
 [node name="Transition_level_2" parent="." groups=["transition_level_2"] instance=ExtResource("12_rir2a")]
-position = Vector2(1392, 11008)
+position = Vector2(1393, 10881)
 
 [node name="Transition_level_3" parent="." groups=["transition_level_3"] instance=ExtResource("12_rir2a")]
 position = Vector2(1968, 10879)

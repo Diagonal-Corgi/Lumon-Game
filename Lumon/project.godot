@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Lumon"
-run/main_scene="res://Scenes/droppable_test.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.188235, 0.188235, 1)
 boot_splash/image="res://Assets/digaonalcorgi-logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://Assets/arcane-flux.png"
+config/icon="res://Assets/Items/arcane-flux.png"
 
 [autoload]
 
@@ -31,6 +31,7 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "HQ_01": "res://HQ_01.dtl",
+"Level_01": "res://Level_01.dtl",
 "timeline": "res://Assets/timeline.dtl"
 }
 layout/style_list=["res://Assets/DIALOG.tres"]
@@ -53,7 +54,9 @@ save/autosave_delay=60.0
 save/encryption_on_exports_only=true
 text/autopauses={}
 variables={}
-glossary/default_case_sensitive=true
+glossary/default_case_sensitive=false
+glossary/glossary_files=["res://glossary.tres"]
+glossary/default_color=Color(0.129639, 1, 0.101563, 1)
 
 [display]
 

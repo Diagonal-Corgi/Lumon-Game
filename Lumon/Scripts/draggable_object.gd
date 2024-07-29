@@ -32,8 +32,7 @@ func _process(delta):
 func _on_area_2d_mouse_entered():
 	if not Global.is_dragging:
 		draggable = true
-		scale = Vector2(4.05, 4.05)
-	pass # Replace with function body.
+		scale = Vector2(5, 5)
 
 
 func _on_area_2d_mouse_exited():
@@ -43,13 +42,13 @@ func _on_area_2d_mouse_exited():
 
 
 func _on_area_2d_body_entered(body: StaticBody2D):
-	if body.is_in_group('droppable'):
+	if body.is_in_group('puzzle_1_top_left'):
 			is_inside_droppable = true
-			body.modulate = Color(Color.REBECCA_PURPLE, 1)
+			body.modulate = Color(Color.GREEN_YELLOW, 1)
 			body_ref = body
 
 
 func _on_area_2d_body_exited(body):
-	if body.is_in_group('droppable'):
+	if body.is_in_group('puzzle_1_top_left'):
 			is_inside_droppable = false
-			body.modulate = Color(Color.REBECCA_PURPLE, 0.7)
+			body.modulate = Color(Color.DARK_SLATE_GRAY, 0.7)

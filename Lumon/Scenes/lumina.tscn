@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://duelvi3xrhdvg"]
+[gd_scene load_steps=11 format=3 uid="uid://duelvi3xrhdvg"]
 
 [ext_resource type="Script" path="res://Scripts/lumina.gd" id="1_n75hf"]
 [ext_resource type="Texture2D" uid="uid://df3qqadnwxw0a" path="res://Assets/lumina.png" id="2_7wrbn"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="2_37mb6"]
+[ext_resource type="AudioStream" uid="uid://b6sgwlrgt2auh" path="res://Assets/Music/zapsplat_cartoon_bubble_pop_005_40277.mp3" id="4_wspxg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
@@ -56,6 +57,10 @@ physics_material_override = SubResource("PhysicsMaterial_s0twl")
 script = ExtResource("1_n75hf")
 
 [node name="Area2D" type="Area2D" parent="." groups=["lumina"]]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("4_wspxg")
+volume_db = -5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_fpipf")

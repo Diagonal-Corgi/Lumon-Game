@@ -13,4 +13,4 @@ func _process(_delta):
 
 func _on_pressed():
 	audio_stream_player.play()
-	get_tree().change_scene_to_file("res://Scenes/game_1.tscn")
+	get_tree().change_scene_to_file("res://Scenes/tutorial.tscn")

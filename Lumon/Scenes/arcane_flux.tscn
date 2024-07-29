@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhoi3qh3udie5"]
+[gd_scene load_steps=13 format=3 uid="uid://bhoi3qh3udie5"]
 
-[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/arcane-flux.png" id="1_1387b"]
 [ext_resource type="Script" path="res://Scripts/arcane_flux.gd" id="1_w4nxt"]
+[ext_resource type="Texture2D" uid="uid://fuxmh1rkkxau" path="res://Assets/Items/arcane-flux.png" id="2_3stvg"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_kl1ma"]
+[ext_resource type="AudioStream" uid="uid://b6sgwlrgt2auh" path="res://Assets/Music/zapsplat_cartoon_bubble_pop_005_40277.mp3" id="4_f5y8p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s0twl"]
 
@@ -120,7 +121,7 @@ shape = SubResource("CircleShape2D_lu5tu")
 rotation = 3.35686
 scale = Vector2(2.1, 2.1)
 skew = -0.0872665
-texture = ExtResource("1_1387b")
+texture = ExtResource("2_3stvg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -128,6 +129,10 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="." groups=["arcane flux"]]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("4_f5y8p")
+volume_db = -5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
