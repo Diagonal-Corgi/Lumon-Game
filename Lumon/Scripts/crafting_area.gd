@@ -3,7 +3,7 @@ extends Node2D
 @onready var craft_panel = $CraftPanel
 @onready var item_list = $CraftPanel/ItemList
 @onready var request_button = $CraftPanel/RequestButton
-
+var within_area = false
 
 var selected_item = 999
 
@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("open_craft_menu"):
+	if Input.is_action_just_pressed("open_craft_menu") and within_area == true:
 		toggle_panel_visibility()
 
 func toggle_panel_visibility():
@@ -25,12 +25,14 @@ func toggle_panel_visibility():
 func _on_area_2d_area_entered(area):
 	if(area.is_in_group("player")):
 		f_label.visible = true
+		within_area = true
 
 
 func _on_area_2d_area_exited(area):
 	if(area.is_in_group("player")):
 		f_label.visible = false
 		craft_panel.visible = false
+		within_area = false
 
 func request_item(index):
 	if index == 0: # DASH

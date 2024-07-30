@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfl2hvgkvkvfg"]
+[gd_scene load_steps=5 format=3 uid="uid://bfl2hvgkvkvfg"]
 
+[ext_resource type="Script" path="res://Scripts/scale_calibrator.gd" id="1_1j44f"]
 [ext_resource type="Texture2D" uid="uid://bu66ipmosg0kd" path="res://Assets/scale-calibrator.png" id="1_etplj"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_4ogc6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snmgb"]
 size = Vector2(109, 70)
 
 [node name="scale_calibrator" type="Area2D"]
+script = ExtResource("1_1j44f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -3)
@@ -14,3 +17,15 @@ shape = SubResource("RectangleShape2D_snmgb")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_etplj")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -199.0
+offset_top = -69.0
+offset_right = 199.0
+offset_bottom = -46.0
+theme = ExtResource("3_4ogc6")
+text = "Press F to reset calibration"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

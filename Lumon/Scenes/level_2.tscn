@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="3_a7ef0"]
 [ext_resource type="PackedScene" uid="uid://c0kufrfbcixx3" path="res://Scenes/hud.tscn" id="4_2yqs3"]
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="5_pipkx"]
-[ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="6_tqh0y"]
 [ext_resource type="Texture2D" uid="uid://uhr33d6nl83g" path="res://Assets/background.png" id="7_wwmcd"]
 [ext_resource type="AudioStream" uid="uid://dnypfa1hhib4p" path="res://Assets/Music/music_zapsplat_quiz_bed_long_space_race.mp3" id="8_bnhuo"]
 [ext_resource type="PackedScene" uid="uid://cod0q5ymace66" path="res://Scenes/drog.tscn" id="10_1dyeo"]
+[ext_resource type="PackedScene" uid="uid://bfl2hvgkvkvfg" path="res://Scenes/scale_calibrator.tscn" id="10_1gxgg"]
 
 [sub_resource type="Animation" id="Animation_8tqgm"]
 length = 0.001
@@ -181,9 +181,6 @@ position = Vector2(2, 8)
 stream = ExtResource("5_pipkx")
 autoplay = true
 
-[node name="Transition" parent="." instance=ExtResource("6_tqh0y")]
-position = Vector2(47, 30)
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -221,3 +218,6 @@ position = Vector2(-187, -352)
 
 [node name="Drog5" parent="." instance=ExtResource("10_1dyeo")]
 position = Vector2(-607, -576)
+
+[node name="scale_calibrator" parent="." instance=ExtResource("10_1gxgg")]
+position = Vector2(588, -577)
