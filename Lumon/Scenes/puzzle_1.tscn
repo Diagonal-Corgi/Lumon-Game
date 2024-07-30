@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4sh0s1ax3pjx"]
+[gd_scene load_steps=13 format=3 uid="uid://4sh0s1ax3pjx"]
 
 [ext_resource type="Script" path="res://Scripts/droppable_test.gd" id="1_5mlh2"]
 [ext_resource type="PackedScene" uid="uid://7fwp38o456p7" path="res://Scenes/droppable.tscn" id="2_tfgs6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://huqhauk5e4h3" path="res://Scenes/puzzle_1_top_right_key.tscn" id="6_hid75"]
 [ext_resource type="PackedScene" uid="uid://c5q4ff5t3a7ds" path="res://Scenes/puzzle_1_top_left_key.tscn" id="7_yw2j0"]
 [ext_resource type="Texture2D" uid="uid://cp7bshfneuyc2" path="res://Assets/Puzzle_1/puzzle_1.png" id="8_ah341"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="9_lm17d"]
 
 [sub_resource type="Animation" id="Animation_geayc"]
 length = 0.001
@@ -58,6 +59,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(902, 411)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FinishLevelButton:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_d7qxn"]
@@ -123,6 +136,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FinishLevelButton:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pjp22"]
 _data = {
@@ -132,6 +157,15 @@ _data = {
 
 [node name="puzzle_1" type="Node2D"]
 script = ExtResource("1_5mlh2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 198.0
+offset_top = 261.0
+offset_right = 455.0
+offset_bottom = 323.0
+theme = ExtResource("9_lm17d")
+text = "Drag and Drop the fragments into the correct area"
+autowrap_mode = 2
 
 [node name="puzzle_1_top_left" parent="." groups=["puzzle_1_top_left"] instance=ExtResource("2_tfgs6")]
 position = Vector2(300, 150)
@@ -179,3 +213,15 @@ texture = ExtResource("8_ah341")
 libraries = {
 "": SubResource("AnimationLibrary_pjp22")
 }
+
+[node name="FinishLevelButton" type="Button" parent="."]
+visible = false
+offset_left = 524.0
+offset_top = 619.0
+offset_right = 704.0
+offset_bottom = 650.0
+theme = ExtResource("9_lm17d")
+text = "Finish Level
+"
+
+[connection signal="pressed" from="FinishLevelButton" to="." method="_on_finish_level_button_pressed"]

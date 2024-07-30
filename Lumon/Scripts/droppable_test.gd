@@ -13,10 +13,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	puzzle_solved()
 
 func puzzle_solved():
 	if solved == false and puzzle_1_bottom_left_key.is_in_correct_position and puzzle_1_bottom_right_key.is_in_correct_position and puzzle_1_top_left_key.is_in_correct_position and puzzle_1_bottom_right_key.is_in_correct_position:
 		animation_player.play("correct")
 		solved = true
+
+
+func _on_finish_level_button_pressed():
+	get_tree().change_scene_to_file("res://Scenes/hq.tscn")

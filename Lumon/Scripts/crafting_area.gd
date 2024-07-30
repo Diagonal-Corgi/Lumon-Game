@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("open_craft_menu"):
 		toggle_panel_visibility()
 
@@ -44,7 +44,7 @@ func request_item(index):
 		else: 
 			request_button.disabled = true
 	elif index == 2: # GOO GUN
-		if Global.inventory["lumina"] >= 2 && Global.inventory["shadonite"] >= 2 && Global.inventory["arcane_flux"] >= 1:
+		if Global.inventory["lumina"] >= 1 && Global.inventory["shadonite"] >= 1 && Global.inventory["arcane_flux"] >= 1:
 			request_button.disabled = false
 		else: 
 			request_button.disabled = true
@@ -69,8 +69,8 @@ func _on_request_button_pressed():
 			Global.goo_gun_ability_enabled = true
 			item_list.set_item_text(2, "Acquired")
 			item_list.set_item_disabled(2, true)
-			Global.remove_item(2, "lumina")
-			Global.remove_item(2, "shadonite")
+			Global.remove_item(1, "lumina")
+			Global.remove_item(1, "shadonite")
 			Global.remove_item(1, "arcane_flux")
 
 func _on_item_list_item_selected(index):

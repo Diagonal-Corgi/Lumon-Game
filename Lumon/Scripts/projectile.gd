@@ -15,8 +15,8 @@ func _ready():
 
 func _physics_process(delta):
 	# Move the projectile
-	var velocity = direction * speed * delta
-	var collision = move_and_collide(velocity)
+	var velocity1 = direction * speed * delta
+	var _collision = move_and_collide(velocity1)
 
 # Set the direction based on an angle (in radians)
 func set_direction_angle(angle):

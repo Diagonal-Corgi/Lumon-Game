@@ -8,6 +8,25 @@
 scale = Vector2(3, 3)
 script = ExtResource("1_cp7h0")
 
+[node name="Empty1" type="Sprite2D" parent="."]
+texture = ExtResource("3_knieg")
+
+[node name="Empty2" type="Sprite2D" parent="."]
+position = Vector2(16, 0)
+texture = ExtResource("3_knieg")
+
+[node name="Empty3" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+texture = ExtResource("3_knieg")
+
+[node name="Empty4" type="Sprite2D" parent="."]
+position = Vector2(48, 0)
+texture = ExtResource("3_knieg")
+
+[node name="Empty5" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("3_knieg")
+
 [node name="Health1" type="Sprite2D" parent="."]
 texture = ExtResource("1_4ao4x")
 
@@ -20,33 +39,9 @@ position = Vector2(32, 0)
 texture = ExtResource("1_4ao4x")
 
 [node name="Health4" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(48, 0)
 texture = ExtResource("1_4ao4x")
 
 [node name="Health5" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(64, 0)
 texture = ExtResource("1_4ao4x")
-
-[node name="Empty1" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_knieg")
-
-[node name="Empty2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(16, 0)
-texture = ExtResource("3_knieg")
-
-[node name="Empty3" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(32, 0)
-texture = ExtResource("3_knieg")
-
-[node name="Empty4" type="Sprite2D" parent="."]
-position = Vector2(48, 0)
-texture = ExtResource("3_knieg")
-
-[node name="Empty5" type="Sprite2D" parent="."]
-position = Vector2(64, 0)
-texture = ExtResource("3_knieg")

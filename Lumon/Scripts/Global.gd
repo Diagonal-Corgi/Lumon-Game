@@ -1,6 +1,6 @@
 extends Node
 
-var health = 3
+var health = 5
 
 var inventory = {"arcane_flux" : 0, "shadonite" : 0, "lumina" : 0}
 

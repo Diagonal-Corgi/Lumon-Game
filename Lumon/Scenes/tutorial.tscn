@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://brd30kqex7qri"]
+[gd_scene load_steps=18 format=3 uid="uid://brd30kqex7qri"]
 
 [ext_resource type="Script" path="res://Scripts/tutorial.gd" id="1_e7j8r"]
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="2_hn6b5"]
@@ -13,8 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://cod0q5ymace66" path="res://Scenes/drog.tscn" id="11_axlpc"]
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="12_b6nkd"]
 [ext_resource type="AudioStream" uid="uid://db3w61wc024hl" path="res://Assets/Music/never_late_smooth_jazz_soft.mp3" id="13_n0pjh"]
-[ext_resource type="PackedScene" uid="uid://c2hr8ts41qq3a" path="res://Scenes/shadonite_new.tscn" id="15_2i4uy"]
-[ext_resource type="PackedScene" uid="uid://b5cfb3e325sdb" path="res://Scenes/lumina_new.tscn" id="15_4lefp"]
 
 [sub_resource type="GDScript" id="GDScript_gmu62"]
 script/source = "extends ParallaxLayer
@@ -145,6 +143,12 @@ id = 69
 [node name="Transition" parent="." groups=["transition_hq"] instance=ExtResource("9_yu32y")]
 position = Vector2(-6156, 454)
 
+[node name="Health4" parent="." instance=ExtResource("10_uus7r")]
+position = Vector2(-5047, 1394)
+
+[node name="Health3" parent="." instance=ExtResource("10_uus7r")]
+position = Vector2(-5084, 1388)
+
 [node name="Health2" parent="." instance=ExtResource("10_uus7r")]
 position = Vector2(-3855, 621)
 
@@ -246,12 +250,3 @@ text = "Portal"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_n0pjh")
 autoplay = true
-
-[node name="Health" parent="." instance=ExtResource("10_uus7r")]
-position = Vector2(-5550, 631)
-
-[node name="lumina" parent="." instance=ExtResource("15_4lefp")]
-position = Vector2(-5596, 627)
-
-[node name="Health3" parent="." instance=ExtResource("15_2i4uy")]
-position = Vector2(-5641, 632)

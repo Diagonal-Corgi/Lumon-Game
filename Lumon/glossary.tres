@@ -5,6 +5,23 @@
 [resource]
 script = ExtResource("1_5yf0q")
 entries = {
+"Dash": {
+"name": "Dash",
+"text": "Extra speed boost while moving"
+},
+"Double Jump": {
+"name": "Double Jump",
+"text": "Allows yourself to jump while in the air"
+},
+"Employment Reward Terminal": {
+"case_sensitive": false,
+"name": "Employment Reward Terminal",
+"text": "Terminal where you can submit equipment upgrades"
+},
+"Goo Gun": {
+"name": "Goo Gun",
+"text": "R&D's favorite tool. Use it to eliminate anomalies, or use it to create temporary platforms. Can be shot through portals."
+},
 "LUMON": {
 "case_sensitive": false,
 "name": "LUMON",

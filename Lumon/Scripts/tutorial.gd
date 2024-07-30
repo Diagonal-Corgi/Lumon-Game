@@ -12,7 +12,7 @@ func _ready():
 		Global.set_mission("Onboarding 101","Complete the training simulation")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func tutorial_dialogue():

@@ -8,8 +8,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvu8c"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bx0vw"]
-radius = 11.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2hdd"]
+size = Vector2(32, 32)
 
 [sub_resource type="Animation" id="Animation_1fd0y"]
 length = 0.001
@@ -86,6 +86,35 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_vosbt"]
+resource_name = "glow"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_mmd3n"]
 resource_name = "pickup"
 tracks/0/type = "method"
@@ -151,35 +180,6 @@ tracks/4/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_vosbt"]
-resource_name = "glow"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.5, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PointLight2D:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m350e"]
 _data = {
 "RESET": SubResource("Animation_1fd0y"),
@@ -203,7 +203,7 @@ texture = ExtResource("3_bmuox")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_bx0vw")
+shape = SubResource("RectangleShape2D_p2hdd")
 debug_color = Color(0.697542, 0.412524, 0.709044, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

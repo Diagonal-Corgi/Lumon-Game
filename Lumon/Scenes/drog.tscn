@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cod0q5ymace66"]
+[gd_scene load_steps=9 format=3 uid="uid://cod0q5ymace66"]
 
 [ext_resource type="Texture2D" uid="uid://ntaqmabsoux1" path="res://Assets/drog.png" id="1_3g1sj"]
 [ext_resource type="Script" path="res://Scripts/drog.gd" id="1_t3epn"]
+[ext_resource type="AudioStream" uid="uid://6rqi45p8tl0r" path="res://Assets/Music/zapsplat_human_fart_mouth_very_short_004_99644.mp3" id="3_yey82"]
 
 [sub_resource type="Animation" id="Animation_s6g1d"]
 length = 0.001
@@ -69,5 +70,8 @@ target_position = Vector2(3.5, 8.58307e-06)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(4, 0.5)
 shape = SubResource("RectangleShape2D_1x7ey")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yey82")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

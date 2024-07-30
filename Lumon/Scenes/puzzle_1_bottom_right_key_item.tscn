@@ -8,8 +8,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvu8c"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bx0vw"]
-radius = 11.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld3il"]
+size = Vector2(32, 32)
 
 [sub_resource type="Animation" id="Animation_1fd0y"]
 length = 0.001
@@ -179,7 +179,7 @@ texture = ExtResource("3_nkpx2")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_bx0vw")
+shape = SubResource("RectangleShape2D_ld3il")
 debug_color = Color(0.697542, 0.412524, 0.709044, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
