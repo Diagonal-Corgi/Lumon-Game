@@ -1,10 +1,13 @@
 extends CharacterBody2D
-@onready var audio_stream_player = $AudioStreamPlayer
 
 @export var speed = 100
 @export var drog_health = 1
+
 @onready var player = $"../Player"
 @onready var animation_player = $AnimationPlayer
+@onready var player_hurt = $player_hurt
+@onready var audio_stream_player = $AudioStreamPlayer
+
 const lumina = preload("res://Scenes/lumina_new.tscn")
 const shadonite = preload("res://Scenes/shadonite_new.tscn")
 const arcane_flux = preload("res://Scenes/arcane_flux_new.tscn")
@@ -60,6 +63,7 @@ func _on_area_2d_area_entered(area):
 func _on_hit_box_area_entered(area):
 	if area.is_in_group("player"):
 		Global.remove_health()
+		player_hurt.play()
 	elif area.is_in_group("player_melee_attack"):
 		audio_stream_player.play()
 		take_damage()

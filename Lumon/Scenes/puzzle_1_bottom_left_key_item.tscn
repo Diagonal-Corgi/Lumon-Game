@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bbe3hs2pyu0of"]
 
 [ext_resource type="Script" path="res://Scripts/puzzle_1_bottom_left_key_item.gd" id="1_4g8wj"]
-[ext_resource type="AudioStream" uid="uid://b6sgwlrgt2auh" path="res://Assets/Music/zapsplat_cartoon_bubble_pop_005_40277.mp3" id="2_qy3xv"]
+[ext_resource type="AudioStream" uid="uid://d3srkqru6dikg" path="res://Assets/Music/zapsplat_multimedia_game_sound_positive_reward_success_ascending_digital_004_49795.mp3" id="2_ah2n7"]
 [ext_resource type="Texture2D" uid="uid://c3ms4tfiljxmu" path="res://Assets/Puzzle_1/puzzle_1_bottom_left.png" id="3_bmuox"]
 [ext_resource type="Texture2D" uid="uid://obfxckolg33r" path="res://Assets/White-Light-Transparent.png" id="4_ebwk2"]
 
@@ -191,7 +191,7 @@ _data = {
 script = ExtResource("1_4g8wj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_qy3xv")
+stream = ExtResource("2_ah2n7")
 volume_db = -5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

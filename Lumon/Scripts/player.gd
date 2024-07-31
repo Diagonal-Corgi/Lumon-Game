@@ -191,4 +191,4 @@ func melee_attack():
 	
 func die():
 	get_tree().reload_current_scene()
-	Global.health = 3
+	Global.health = 5
