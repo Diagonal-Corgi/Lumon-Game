@@ -4,16 +4,20 @@ var health = 5
 
 var inventory = {"arcane_flux" : 0, "shadonite" : 0, "lumina" : 0}
 
-var dash_ability_enabled = false
-var double_jump_ability_enabled = false
-var goo_gun_ability_enabled = false
-var tutorial_completed = false
+var dash_ability_enabled = true
+var double_jump_ability_enabled = true
+var goo_gun_ability_enabled = true
 var onboarding_completed = false
 var is_dragging = false
 var mission_title = ""
 var mission_description = ""
 
 var can_access_terminal_level_1 = false
+var tutorial_complete = false
+var level_1_complete = false
+var level_2_complete = false
+var level_3_complete = false
+var tutorial_completed = false
 
 func check_if_can_access_terminal():
 	if inventory.has("puzzle_1_bottom_left_key") and inventory.has("puzzle_1_bottom_right_key") and inventory.has("puzzle_1_top_left_key") and inventory.has("puzzle_1_top_right_key"):

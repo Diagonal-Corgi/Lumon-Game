@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci3s5ry2ldn21"]
+
+[ext_resource type="Script" path="res://Scripts/rotate_calibrator.gd" id="1_kggqm"]
+[ext_resource type="Texture2D" uid="uid://bu66ipmosg0kd" path="res://Assets/scale-calibrator.png" id="2_4keje"]
+[ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="3_8jhlw"]
+[ext_resource type="Script" path="res://Scripts/level2_complete_button.gd" id="4_nxj4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snmgb"]
+size = Vector2(109, 70)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_525g6"]
+bg_color = Color(0.054902, 0.113725, 0.113725, 1)
+
+[node name="rotate_calibrator" type="Area2D"]
+script = ExtResource("1_kggqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -3)
+shape = SubResource("RectangleShape2D_snmgb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_4keje")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -199.0
+offset_top = -69.0
+offset_right = 199.0
+offset_bottom = -46.0
+theme = ExtResource("3_8jhlw")
+text = "Press F to reset calibration"
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -431.0
+offset_top = -262.0
+offset_right = 442.0
+offset_bottom = 247.0
+theme = ExtResource("3_8jhlw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_525g6")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 48.0
+offset_right = 574.0
+offset_bottom = 146.0
+theme = ExtResource("3_8jhlw")
+text = "Calibration complete..stopping rotation..."
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 369.0
+offset_right = 522.0
+offset_bottom = 402.0
+text = "Return to HQ"
+script = ExtResource("4_nxj4r")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]

@@ -1,5 +1,5 @@
 extends Area2D
-@onready var level_2 = $"."
+@onready var level_3 = $"."
 @onready var label = $Label
 var within_area = false
 @onready var panel = $Panel
@@ -26,4 +26,4 @@ func _on_area_exited(_area):
 
 
 func _on_button_pressed():
-		get_tree().change_scene_to_file("res://Scenes/hq.tscn")
+		get_tree().change_scene_to_file("res://Scenes/thanks_for_playing.tscn")

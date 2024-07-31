@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lumon"
-run/main_scene="res://Scenes/level_2.tscn"
+run/main_scene="res://Scenes/level_3.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.188235, 0.188235, 1)
 boot_splash/image="res://Assets/digaonalcorgi-logo.png"
@@ -34,6 +34,7 @@ directories/dtl_directory={
 "HQ_02": "res://HQ_02.dtl",
 "Level_01": "res://Level_01.dtl",
 "Level_02": "res://Level_02.dtl",
+"Level_03": "res://Level_03.dtl",
 "timeline": "res://Assets/timeline.dtl"
 }
 layout/style_list=["res://Assets/DIALOG.tres"]

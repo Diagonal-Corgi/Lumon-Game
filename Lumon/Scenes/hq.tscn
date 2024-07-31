@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmmc75uvol4dc"]
+[gd_scene load_steps=14 format=3 uid="uid://cmmc75uvol4dc"]
 
 [ext_resource type="PackedScene" uid="uid://ckl4xhjuswana" path="res://Scenes/player.tscn" id="1_5dr0l"]
 [ext_resource type="TileSet" uid="uid://c8e3in3jxa617" path="res://Scenes/tilesets/lumon-onboarding.tres" id="1_i35iy"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cb8kib1q1hoac" path="res://Assets/Music/background-hum.mp3" id="7_gqtus"]
 [ext_resource type="AudioStream" uid="uid://8g7ynsassahw" path="res://Assets/Music/difficult_desicions.mp3" id="8_bxg23"]
 [ext_resource type="Theme" uid="uid://c5j3f4cami1ab" path="res://default_theme.tres" id="8_of28l"]
+[ext_resource type="PackedScene" uid="uid://bkh5hqdgl8jhb" path="res://Scenes/portal.tscn" id="10_ry4bd"]
 [ext_resource type="PackedScene" uid="uid://xmfej6r0lvpk" path="res://Scenes/transition.tscn" id="12_rir2a"]
 [ext_resource type="PackedScene" uid="uid://c8e1fdhl0frdo" path="res://Scenes/crafting_area.tscn" id="13_c1lbw"]
 
@@ -89,7 +90,7 @@ offset_top = 10859.0
 offset_right = 1591.0
 offset_bottom = 10882.0
 theme = ExtResource("8_of28l")
-text = "Area ZXC088"
+text = "Room 2"
 
 [node name="Training Center3" type="Label" parent="."]
 offset_left = 1420.0
@@ -97,7 +98,7 @@ offset_top = 10990.0
 offset_right = 1599.0
 offset_bottom = 11013.0
 theme = ExtResource("8_of28l")
-text = "Area CZX890"
+text = "Room 1"
 
 [node name="Training Center4" type="Label" parent="."]
 offset_left = 1779.0
@@ -105,7 +106,7 @@ offset_top = 10859.0
 offset_right = 1949.0
 offset_bottom = 10882.0
 theme = ExtResource("8_of28l")
-text = "Area XXC909
+text = "Room 3
 "
 
 [node name="Training Center5" type="Label" parent="."]
@@ -114,7 +115,7 @@ offset_top = 10990.0
 offset_right = 1949.0
 offset_bottom = 11013.0
 theme = ExtResource("8_of28l")
-text = "Area XXX000"
+text = "Back To HQ"
 
 [node name="Training Center2" type="Label" parent="."]
 offset_left = -223.0
@@ -134,3 +135,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1cj7h")
 }
 autoplay = "music"
+
+[node name="portal" parent="." instance=ExtResource("10_ry4bd")]
+position = Vector2(1986, 11015)
+
+[node name="portal2" parent="." instance=ExtResource("10_ry4bd")]
+position = Vector2(124, 98)

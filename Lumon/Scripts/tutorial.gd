@@ -10,11 +10,9 @@ func _ready():
 		Global.goo_gun_ability_enabled = true
 		Global.onboarding_completed = true
 		Global.set_mission("Onboarding 101","Complete the training simulation")
+		Global.tutorial_complete = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-func tutorial_dialogue():
-	get_tree().paused = true
-	Dialogic.start("timeline")
