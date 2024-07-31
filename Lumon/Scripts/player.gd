@@ -1,9 +1,10 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var animation_player = $AnimatedSprite2D/HitBox/AnimationPlayer
-var ProjectileScene = preload("res://Scenes/projectile.tscn")
 @onready var attack_noise = $AnimatedSprite2D/HitBox/AudioStreamPlayer
+@onready var projectile_sound = $projectile_sound
 
+var ProjectileScene = preload("res://Scenes/projectile.tscn")
 const SPEED = 100.0
 const JUMP_VELOCITY = -290.0
 const DASH_SPEED = 300.0
@@ -160,6 +161,7 @@ func _on_area_2d_area_entered(area):
 # Function to shoot the projectile
 func shoot():
 	var projectile = ProjectileScene.instantiate()
+	projectile_sound.play()
 	# Set the position of the projectile (e.g., at the player's position)
 	if is_flipped == true:
 		projectile.position = animated_sprite_2d.global_position + Vector2(-16, -16)

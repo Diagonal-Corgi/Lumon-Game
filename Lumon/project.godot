@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lumon"
-run/main_scene="res://Scenes/level_3.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.188235, 0.188235, 1)
 boot_splash/image="res://Assets/digaonalcorgi-logo.png"

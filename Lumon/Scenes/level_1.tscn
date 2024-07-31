@@ -249,6 +249,18 @@ position = Vector2(405, 1983)
 [node name="arcane_flux4" parent="." instance=ExtResource("21_1yv7t")]
 position = Vector2(436, 1950)
 
+[node name="shadonite6" parent="." instance=ExtResource("18_07lv7")]
+position = Vector2(-83, 1994)
+
+[node name="shadonite7" parent="." instance=ExtResource("18_07lv7")]
+position = Vector2(-68, 1964)
+
+[node name="shadonite8" parent="." instance=ExtResource("18_07lv7")]
+position = Vector2(-2, 1499)
+
+[node name="Health4" parent="." instance=ExtResource("21_p3f02")]
+position = Vector2(973, 1450)
+
 [node name="platforms" type="Node" parent="."]
 
 [node name="platform7" parent="platforms" instance=ExtResource("17_mdyfr")]
